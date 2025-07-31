@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Import SendBird UI Kit styles */
 @import "@sendbird/uikit-react/dist/index.css";
+@import "tailwindcss";
 
 /* Custom widget styles */
 .chat-widget-container {
