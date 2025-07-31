@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "@sendbird/uikit-react/dist/index.css";
 import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
 import GroupChannel from "@sendbird/uikit-react/GroupChannel";
 import SendbirdProvider from "@sendbird/uikit-react/SendbirdProvider";

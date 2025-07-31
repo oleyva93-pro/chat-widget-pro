@@ -1,0 +1,24 @@
+/* Import SendBird UI Kit styles */
+@import "@sendbird/uikit-react/dist/index.css";
+
+/* Custom widget styles */
+.chat-widget-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure SendBird components are properly styled */
+.sendbird-conversation {
+  height: 100%;
+}
+
+.sendbird-channel-list {
+  height: 100%;
+}
+
+.sendbird-channel {
+  height: 100%;
+} 

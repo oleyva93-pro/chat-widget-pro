@@ -32,4 +32,7 @@ export default defineConfig({
   css: {
     modules: false,
   },
+  define: {
+    "process.env.NODE_ENV": '"production"',
+  },
 });

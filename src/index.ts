@@ -1,3 +1,6 @@
+// Import styles
+import "./styles/index.css";
+
 // Main widget component
 export { ChatWidget } from "./components/ChatWidget";
 

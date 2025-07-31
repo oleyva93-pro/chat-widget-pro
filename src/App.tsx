@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ChatWidgetProvider, ChatWidget } from "./index";
+import { ChatWidget, ChatWidgetProvider } from "chat-widget-sendbird";
+import { useState } from "react";
 import "./index.css";
 
 function App() {

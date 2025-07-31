@@ -1,4 +1,4 @@
-# @your-company/chat-widget
+# chat-widget-sendbird
 
 Un widget de chat profesional y modular construido con React, Vite, Tailwind CSS y SendBird UI Kit.
 
@@ -10,11 +10,12 @@ Un widget de chat profesional y modular construido con React, Vite, Tailwind CSS
 - **Diseño Responsive**: Interfaz moderna con Tailwind CSS
 - **NPM Package**: Listo para publicar y reutilizar
 - **TypeScript**: Tipado completo para mejor desarrollo
+- **Estilos Incluidos**: Los estilos de SendBird UI Kit están incluidos automáticamente
 
 ## 📦 Instalación
 
 ```bash
-npm install @your-company/chat-widget
+npm install chat-widget-sendbird
 ```
 
 ## 🎯 Uso Rápido
@@ -22,7 +23,7 @@ npm install @your-company/chat-widget
 ### Widget Completo
 
 ```tsx
-import { ChatWidgetProvider, ChatWidget } from '@your-company/chat-widget';
+import { ChatWidgetProvider, ChatWidget } from 'chat-widget-sendbird';
 
 const config = {
   appId: "TU_SENDBIRD_APP_ID",
@@ -45,7 +46,7 @@ function App() {
 #### ChatIcon (Icono con Badge)
 
 ```tsx
-import { ChatIcon } from '@your-company/chat-widget';
+import { ChatIcon } from 'chat-widget-sendbird';
 
 <ChatIcon
   unreadCount={5}
@@ -58,7 +59,7 @@ import { ChatIcon } from '@your-company/chat-widget';
 #### ChatList (Lista de Chats)
 
 ```tsx
-import { ChatList } from '@your-company/chat-widget';
+import { ChatList } from 'chat-widget-sendbird';
 
 <ChatList
   config={config}
@@ -69,7 +70,7 @@ import { ChatList } from '@your-company/chat-widget';
 #### ChannelList (Lista de Canales)
 
 ```tsx
-import { ChannelList } from '@your-company/chat-widget';
+import { ChannelList } from 'chat-widget-sendbird';
 
 <ChannelList
   config={config}
@@ -80,12 +81,35 @@ import { ChannelList } from '@your-company/chat-widget';
 #### ChatWindow (Ventana de Chat)
 
 ```tsx
-import { ChatWindow } from '@your-company/chat-widget';
+import { ChatWindow } from 'chat-widget-sendbird';
 
 <ChatWindow
   config={config}
   channelUrl="CHANNEL_URL"
 />
+```
+
+## 🎨 Estilos
+
+Los estilos de SendBird UI Kit están **incluidos automáticamente** en el paquete. No necesitas importar nada adicional:
+
+```tsx
+// ✅ Correcto - Los estilos se importan automáticamente
+import { ChatWidget } from 'chat-widget-sendbird';
+
+// ❌ No es necesario - Los estilos ya están incluidos
+// import '@sendbird/uikit-react/dist/index.css';
+```
+
+Si necesitas personalizar los estilos, puedes sobrescribir las variables CSS de SendBird:
+
+```css
+/* En tu archivo CSS */
+:root {
+  --sendbird-light-primary-500: #3B82F6;
+  --sendbird-light-primary-600: #2563EB;
+  --sendbird-light-background-50: #F8FAFC;
+}
 ```
 
 ## ⚙️ Configuración
@@ -296,3 +320,4 @@ Si tienes problemas o preguntas:
 - ✅ Diseño responsive con Tailwind
 - ✅ TypeScript completo
 - ✅ NPM package listo
+- ✅ Estilos de SendBird incluidos automáticamente
