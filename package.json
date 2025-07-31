@@ -40,7 +40,8 @@
   },
   "dependencies": {
     "@sendbird/chat": "^4.19.6",
-    "@sendbird/uikit-react": "^3.17.0"
+    "@sendbird/uikit-react": "^3.17.0",
+    "chat-widget-sendbird": "^1.1.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -58,6 +59,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^4.5.0"
