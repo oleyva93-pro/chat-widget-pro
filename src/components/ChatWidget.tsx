@@ -54,7 +54,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
       <SendbirdProvider
         appId={config.appId}
         userId={config.userId}
-        accessToken={config.accessToken}
         sdkInitParams={{
           appStateToggleEnabled: false,
         }}
