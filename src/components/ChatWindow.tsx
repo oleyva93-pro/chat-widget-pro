@@ -1,4 +1,5 @@
 import React from "react";
+import "@sendbird/uikit-react/dist/index.css";
 import GroupChannel from "@sendbird/uikit-react/GroupChannel";
 import SendbirdProvider from "@sendbird/uikit-react/SendbirdProvider";
 import type { ChatWindowProps } from "../types";

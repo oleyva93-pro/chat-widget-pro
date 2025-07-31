@@ -1,4 +1,5 @@
 import React from "react";
+import "@sendbird/uikit-react/dist/index.css";
 import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
 import SendbirdProvider from "@sendbird/uikit-react/SendbirdProvider";
 import type { ChannelListProps } from "../types";
