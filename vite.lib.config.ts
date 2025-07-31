@@ -1,10 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "path";
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -12,18 +11,11 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "esm" : format}.js`,
     },
     rollupOptions: {
-      external: [
-        "react",
-        "react-dom",
-        "@sendbird/chat",
-        "@sendbird/uikit-react",
-      ],
+      external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "@sendbird/chat": "SendbirdChat",
-          "@sendbird/uikit-react": "SendbirdUIKitReact",
         },
       },
     },
@@ -35,5 +27,8 @@ export default defineConfig({
   },
   define: {
     "process.env.NODE_ENV": '"production"',
+  },
+  optimizeDeps: {
+    include: ["@sendbird/chat", "@sendbird/uikit-react"],
   },
 });

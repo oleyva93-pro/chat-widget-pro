@@ -1,16 +1,17 @@
-# chat-widget-sendbird
+# Chat Widget SendBird
 
-Un widget de chat profesional y modular construido con React, Vite, Tailwind CSS y SendBird UI Kit.
+Un widget de chat profesional construido con SendBird UI Kit y React, listo para usar en cualquier aplicación web.
 
 ## 🚀 Características
 
-- **Componentes Modulares**: Usa componentes individuales según tus necesidades
-- **SendBird Real**: Conectado con la API real de SendBird
-- **Chat en Tiempo Real**: Mensajería instantánea con múltiples canales
-- **Diseño Responsive**: Interfaz moderna con Tailwind CSS
-- **NPM Package**: Listo para publicar y reutilizar
-- **TypeScript**: Tipado completo para mejor desarrollo
-- **Estilos Incluidos**: Los estilos de SendBird UI Kit están incluidos automáticamente
+- ✅ **Chat en tiempo real** con SendBird
+- ✅ **Interfaz moderna** y responsive
+- ✅ **Múltiples ventanas de chat** simultáneas
+- ✅ **Badge de mensajes no leídos**
+- ✅ **Posicionamiento flexible** (bottom-right, bottom-left, top-right, top-left)
+- ✅ **TypeScript** incluido
+- ✅ **Estilos incluidos** automáticamente
+- ✅ **Fácil integración** en cualquier proyecto React
 
 ## 📦 Instalación
 
@@ -18,277 +19,246 @@ Un widget de chat profesional y modular construido con React, Vite, Tailwind CSS
 npm install chat-widget-sendbird
 ```
 
-## 🎯 Uso Rápido
-
-### Widget Completo
+## 🎯 Uso Básico
 
 ```tsx
-import { ChatWidgetProvider, ChatWidget } from 'chat-widget-sendbird';
-
-const config = {
-  appId: "TU_SENDBIRD_APP_ID",
-  userId: "TU_USER_ID",
-  position: "bottom-right",
-  showUnreadBadge: true,
-};
+import React from 'react';
+import { ChatWidget } from 'chat-widget-sendbird';
 
 function App() {
-  return (
-    <ChatWidgetProvider config={config}>
-      <ChatWidget config={config} />
-    </ChatWidgetProvider>
-  );
+  const config = {
+    appId: "TU_SENDBIRD_APP_ID",
+    userId: "usuario-unico-123",
+    position: "bottom-right", // bottom-right, bottom-left, top-right, top-left
+    showUnreadBadge: true,
+    isOpen: false
+  };
+
+  return <ChatWidget config={config} />;
 }
 ```
 
-### Componentes Individuales
+## ⚙️ Configuración
 
-#### ChatIcon (Icono con Badge)
+### Configuración Básica
+
+```tsx
+const config = {
+  appId: "TU_SENDBIRD_APP_ID",        // Requerido
+  userId: "usuario-unico-123",        // Requerido
+  accessToken: "token-opcional",      // Opcional
+  position: "bottom-right",           // Opcional: bottom-right, bottom-left, top-right, top-left
+  showUnreadBadge: true,              // Opcional: true/false
+  isOpen: false,                      // Opcional: true/false
+  theme: "light",                     // Opcional: light/dark
+  language: "es"                      // Opcional: es, en, etc.
+};
+```
+
+### Configuración Avanzada
+
+```tsx
+const config = {
+  appId: "TU_SENDBIRD_APP_ID",
+  userId: "usuario-unico-123",
+  accessToken: "token-opcional",
+  position: "bottom-right",
+  showUnreadBadge: true,
+  isOpen: false,
+  theme: "light",
+  language: "es",
+  customTheme: {
+    // Personalización de colores
+    "--sendbird-light-primary-300": "#742ddd",
+    "--sendbird-light-background-50": "#ffffff"
+  },
+  onChannelChanged: (channel) => {
+    console.log('Canal cambiado:', channel);
+  },
+  onMessageReceived: (message) => {
+    console.log('Mensaje recibido:', message);
+  },
+  onUserConnected: (user) => {
+    console.log('Usuario conectado:', user);
+  },
+  onUserDisconnected: (user) => {
+    console.log('Usuario desconectado:', user);
+  }
+};
+```
+
+## 🧩 Componentes Individuales
+
+### ChatIcon
 
 ```tsx
 import { ChatIcon } from 'chat-widget-sendbird';
 
 <ChatIcon
   unreadCount={5}
-  onClick={() => console.log('Chat clicked')}
+  onClick={() => console.log('Icono clickeado')}
   showBadge={true}
-  size="lg"
+  size="lg" // sm, md, lg, xl
+  className="custom-class"
 />
 ```
 
-#### ChatList (Lista de Chats)
+### ChatList
 
 ```tsx
 import { ChatList } from 'chat-widget-sendbird';
 
 <ChatList
   config={config}
-  onChannelSelect={(channel) => console.log('Channel selected:', channel)}
+  onChannelSelect={(channel) => console.log('Canal seleccionado:', channel)}
+  className="custom-class"
 />
 ```
 
-#### ChannelList (Lista de Canales)
+### ChannelList
 
 ```tsx
 import { ChannelList } from 'chat-widget-sendbird';
 
 <ChannelList
   config={config}
-  onChannelSelect={(channel) => console.log('Channel selected:', channel)}
+  onChannelSelect={(channel) => console.log('Canal seleccionado:', channel)}
+  className="custom-class"
 />
 ```
 
-#### ChatWindow (Ventana de Chat)
+### ChatWindow
 
 ```tsx
 import { ChatWindow } from 'chat-widget-sendbird';
 
 <ChatWindow
   config={config}
-  channelUrl="CHANNEL_URL"
+  channelUrl="https://sendbird.com/channels/123"
+  className="custom-class"
 />
-```
-
-## 🎨 Estilos
-
-Los estilos de SendBird UI Kit están **incluidos automáticamente** en el paquete. No necesitas importar nada adicional:
-
-```tsx
-// ✅ Correcto - Los estilos se importan automáticamente
-import { ChatWidget } from 'chat-widget-sendbird';
-
-// ❌ No es necesario - Los estilos ya están incluidos
-// import '@sendbird/uikit-react/dist/index.css';
-```
-
-Si necesitas personalizar los estilos, puedes sobrescribir las variables CSS de SendBird:
-
-```css
-/* En tu archivo CSS */
-:root {
-  --sendbird-light-primary-500: #3B82F6;
-  --sendbird-light-primary-600: #2563EB;
-  --sendbird-light-background-50: #F8FAFC;
-}
-```
-
-## ⚙️ Configuración
-
-### SendBirdConfig
-
-```tsx
-interface SendBirdConfig {
-  appId: string;           // Tu SendBird App ID
-  userId: string;          // ID del usuario
-  accessToken?: string;    // Token de acceso (opcional)
-  theme?: "light" | "dark"; // Tema
-  customTheme?: Record<string, any>; // Tema personalizado
-  language?: string;       // Idioma
-}
-```
-
-### ChatWidgetConfig
-
-```tsx
-interface ChatWidgetConfig extends SendBirdConfig {
-  position?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
-  showUnreadBadge?: boolean;
-  isOpen?: boolean;
-  onChannelChanged?: (channel: any) => void;
-  onMessageReceived?: (message: any) => void;
-  onUserConnected?: (user: any) => void;
-  onUserDisconnected?: (user: any) => void;
-}
 ```
 
 ## 🎨 Personalización
 
-### Posiciones del Widget
+### Estilos CSS
+
+Los estilos se incluyen automáticamente, pero puedes personalizarlos:
+
+```css
+/* Personalizar el widget */
+.chat-widget-container {
+  font-family: 'Tu Fuente', sans-serif;
+}
+
+/* Personalizar el icono */
+.chat-icon {
+  background-color: #tu-color !important;
+}
+
+/* Personalizar el badge */
+.unread-badge {
+  background-color: #ff0000 !important;
+}
+```
+
+### Temas
 
 ```tsx
-const positions = [
-  "bottom-right",  // Esquina inferior derecha (por defecto)
-  "bottom-left",   // Esquina inferior izquierda
-  "top-right",     // Esquina superior derecha
-  "top-left"       // Esquina superior izquierda
-];
+// Tema claro (por defecto)
+const lightConfig = {
+  ...config,
+  theme: "light"
+};
+
+// Tema oscuro
+const darkConfig = {
+  ...config,
+  theme: "dark"
+};
 ```
 
-### Tamaños del Icono
+## 🔧 Solución de Problemas
+
+### Error: "Instance ID is missing"
+
+**Causa:** SendBird no se inicializa correctamente.
+
+**Solución:**
+1. Verifica que tu `appId` sea válido
+2. Asegúrate de que el `userId` sea único
+3. Revisa la consola del navegador para más detalles
+
+### Error: "SendBird SDK not found"
+
+**Causa:** El SDK de SendBird no se carga.
+
+**Solución:**
+1. Verifica tu conexión a internet
+2. Asegúrate de usar la versión más reciente del paquete
+3. Limpia la caché del navegador
+
+### Los estilos no se cargan
+
+**Causa:** Los estilos de SendBird no se importan.
+
+**Solución:**
+1. Los estilos se incluyen automáticamente
+2. Si usas CSS modules, asegúrate de importar los estilos manualmente:
 
 ```tsx
-const sizes = [
-  "sm",   // 32x32px
-  "md",   // 40x40px
-  "lg",   // 48x48px (por defecto)
-  "xl"    // 64x64px
-];
+import 'chat-widget-sendbird/dist/style.css';
 ```
 
-## 🔧 Desarrollo
+## 📋 Requisitos
 
-### Instalar Dependencias
+- React 18+ o 19+
+- SendBird App ID válido
+- Conexión a internet
 
-```bash
-npm install
+## 🚀 Ejemplo Completo
+
+```tsx
+import React, { useState } from 'react';
+import { ChatWidget, ChatWidgetProvider } from 'chat-widget-sendbird';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const config = {
+    appId: "2D7B4CDB-932F-4AE2-8FE9-3BBEC7353A4A",
+    userId: "usuario-" + Date.now(),
+    position: "bottom-right",
+    showUnreadBadge: true,
+    isOpen: isOpen,
+    onChannelChanged: (channel) => {
+      console.log('Canal cambiado:', channel);
+    },
+    onMessageReceived: (message) => {
+      console.log('Mensaje recibido:', message);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Mi Aplicación con Chat</h1>
+      <button onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? 'Cerrar Chat' : 'Abrir Chat'}
+      </button>
+      
+      <ChatWidgetProvider config={config}>
+        <ChatWidget config={config} />
+      </ChatWidgetProvider>
+    </div>
+  );
+}
+
+export default App;
 ```
 
-### Servidor de Desarrollo
+## 📄 Licencia
 
-```bash
-npm run dev
-```
-
-### Construir Biblioteca
-
-```bash
-npm run build:lib
-```
-
-### Linting
-
-```bash
-npm run lint
-```
-
-## 📚 API Reference
-
-### ChatWidget
-
-Widget completo con icono flotante y ventana expandible.
-
-**Props:**
-- `config: ChatWidgetConfig` - Configuración del widget
-- `className?: string` - Clases CSS adicionales
-
-### ChatIcon
-
-Icono de chat con badge de mensajes no leídos.
-
-**Props:**
-- `unreadCount?: number` - Número de mensajes no leídos
-- `onClick?: () => void` - Función al hacer clic
-- `showBadge?: boolean` - Mostrar badge (por defecto: true)
-- `size?: "sm" | "md" | "lg" | "xl"` - Tamaño del icono
-- `className?: string` - Clases CSS adicionales
-
-### ChatList
-
-Lista de chats usando SendBird GroupChannelList.
-
-**Props:**
-- `config: SendBirdConfig` - Configuración de SendBird
-- `onChannelSelect?: (channel: any) => void` - Callback al seleccionar canal
-- `className?: string` - Clases CSS adicionales
-
-### ChannelList
-
-Lista de canales usando SendBird GroupChannelList.
-
-**Props:**
-- `config: SendBirdConfig` - Configuración de SendBird
-- `onChannelSelect?: (channel: any) => void` - Callback al seleccionar canal
-- `className?: string` - Clases CSS adicionales
-
-### ChatWindow
-
-Ventana de chat para un canal específico.
-
-**Props:**
-- `config: SendBirdConfig` - Configuración de SendBird
-- `channelUrl?: string` - URL del canal a mostrar
-- `className?: string` - Clases CSS adicionales
-
-### ChatWidgetProvider
-
-Provider para el estado del widget.
-
-**Props:**
-- `children: React.ReactNode` - Componentes hijos
-- `config: SendBirdConfig` - Configuración de SendBird
-- `isOpen?: boolean` - Estado inicial abierto/cerrado
-- `onChannelChanged?: (channel: any) => void` - Callback al cambiar canal
-
-### useChatWidget
-
-Hook para acceder al estado del widget.
-
-**Returns:**
-- `state: ChatWidgetState` - Estado actual
-- `toggleChat: () => void` - Función para abrir/cerrar
-- `selectChannel: (channel: any) => void` - Función para seleccionar canal
-- `updateUnreadCount: (count: number) => void` - Función para actualizar contador
-- `setConnected: (connected: boolean) => void` - Función para establecer conexión
-
-### useUnreadMessages
-
-Hook para manejar mensajes no leídos.
-
-**Params:**
-- `config: { appId: string; userId: string }` - Configuración básica
-
-**Returns:**
-- `unreadCount: number` - Número de mensajes no leídos
-
-## 🚀 Publicación
-
-### Preparar para Publicación
-
-```bash
-npm run build:lib
-```
-
-### Publicar en NPM
-
-```bash
-npm publish
-```
-
-O usar el script automatizado:
-
-```bash
-./scripts/publish.sh
-```
+MIT
 
 ## 🤝 Contribuir
 
@@ -298,26 +268,14 @@ O usar el script automatizado:
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 🆘 Soporte
+## 📞 Soporte
 
 Si tienes problemas o preguntas:
 
 1. Revisa la [documentación de SendBird](https://sendbird.com/docs)
-2. Abre un issue en este repositorio
-3. Contacta al equipo de desarrollo
+2. Abre un issue en GitHub
+3. Contacta al autor: oleyva93-pro
 
-## 📝 Changelog
+---
 
-### v1.0.0
-- ✅ Widget completo con SendBird real
-- ✅ Componentes modulares individuales
-- ✅ Chat en tiempo real
-- ✅ Badge de mensajes no leídos
-- ✅ Diseño responsive con Tailwind
-- ✅ TypeScript completo
-- ✅ NPM package listo
-- ✅ Estilos de SendBird incluidos automáticamente
+**¡Disfruta usando el Chat Widget SendBird! 🎉**
