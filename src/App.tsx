@@ -1,5 +1,5 @@
-// import { ChatWidget, ChatWidgetProvider } from "chat-widget-sendbird";
-import { ChatWidget, ChatWidgetProvider } from "./index";
+import { ChatWidget, ChatWidgetProvider } from "chat-widget-sendbird";
+// import { ChatWidget, ChatWidgetProvider } from "./index";
 import { useState } from "react";
 import "./index.css";
 
