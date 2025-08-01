@@ -1,7 +1,7 @@
 {
   "name": "chat-widget-sendbird",
   "private": false,
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "description": "A professional chat widget built with SendBird UI Kit and React",
   "keywords": [
@@ -29,8 +29,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts && npm run copy-types",
+    "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts && npm run copy-types && npm run clean-temp",
     "copy-types": "cp -r dist-temp/* dist/ 2>/dev/null || true",
+    "clean-temp": "rm -rf dist-temp",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublishOnly": "npm run build:lib"
