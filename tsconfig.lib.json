@@ -3,7 +3,7 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist-temp",
     "rootDir": "./src",
     "noEmit": false,
     "moduleResolution": "node",
@@ -18,13 +18,12 @@
   "exclude": [
     "node_modules", 
     "dist", 
+    "dist-temp",
     "**/*.test.ts", 
     "**/*.test.tsx", 
     "**/*.spec.ts", 
     "**/*.spec.tsx", 
     "src/App.tsx", 
-    "src/main.tsx",
-    "src/components/ChatList.tsx",
-    "src/components/ChannelList.tsx"
+    "src/main.tsx"
   ]
 } 
