@@ -43,6 +43,7 @@
   "dependencies": {
     "@sendbird/chat": "^4.19.6",
     "@sendbird/uikit-react": "^3.17.0",
+    "@tailwindcss/vite": "^4.1.11",
     "chat-widget-sendbird": "^1.2.5"
   },
   "devDependencies": {
