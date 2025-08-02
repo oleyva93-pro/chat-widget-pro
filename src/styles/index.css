@@ -1,6 +1,3 @@
-/* Import SendBird UI Kit styles */
-@import "@sendbird/uikit-react/dist/index.css";
-
 /* Custom widget styles */
 .chat-widget-container {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
