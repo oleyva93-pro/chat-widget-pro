@@ -42,7 +42,8 @@
   },
   "dependencies": {
     "@sendbird/chat": "^4.19.6",
-    "@sendbird/uikit-react": "^3.17.0"
+    "@sendbird/uikit-react": "^3.17.0",
+    "chat-widget-sendbird": "^1.2.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
