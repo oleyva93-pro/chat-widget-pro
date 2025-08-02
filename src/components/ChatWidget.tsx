@@ -1,11 +1,10 @@
-import React, { useState } from "react";
 import "@sendbird/uikit-react/dist/index.css";
-import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
 import GroupChannel from "@sendbird/uikit-react/GroupChannel";
+import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
 import SendbirdProvider from "@sendbird/uikit-react/SendbirdProvider";
+import React, { useState } from "react";
+import { Drawer } from "vaul";
 import type { ChatWidgetProps } from "../types";
-import { ChatIcon } from "./ChatIcon";
-import { useChatWidget } from "../hooks/useChatWidget";
 
 interface ChannelEntry {
   url: string;
@@ -13,21 +12,9 @@ interface ChannelEntry {
   key: string;
 }
 
-export const ChatWidget: React.FC<ChatWidgetProps> = ({
-  config,
-  className = "",
-}) => {
-  const { state, toggleChat } = useChatWidget();
+export const ChatWidget: React.FC<ChatWidgetProps> = ({ config }) => {
   const [channels, setChannels] = useState<ChannelEntry[]>([]);
-
-  const positionClasses: Record<string, string> = {
-    "bottom-right": "bottom-4 right-4",
-    "bottom-left": "bottom-4 left-4",
-    "top-right": "top-4 right-4",
-    "top-left": "top-4 left-4",
-  };
-
-  const position = config.position || "bottom-right";
+  const [search, setSearch] = useState("");
 
   const handleSelection = (url: string, name: string) => {
     setChannels((prev) => {
@@ -36,79 +23,59 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({
     });
   };
 
-  if (!state.isOpen) {
-    return (
-      <div className={`fixed ${positionClasses[position]} z-50 ${className}`}>
-        <ChatIcon
-          unreadCount={state.unreadCount}
-          onClick={toggleChat}
-          showBadge={config.showUnreadBadge !== false}
-          size="lg"
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className={`fixed ${positionClasses[position]} z-50 ${className}`}>
-      <SendbirdProvider
-        appId={config.appId}
-        userId={config.userId}
-        sdkInitParams={{
-          appStateToggleEnabled: false,
-        }}
-      >
-        <div className="bg-white rounded-lg shadow-2xl border border-gray-200 w-[800px] h-[600px] flex flex-col">
-          {/* Header */}
-          <div className="p-4 border-b border-gray-200 bg-gray-50 rounded-t-lg">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-gray-800">Chat</h3>
-              <button
-                onClick={toggleChat}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
+    <SendbirdProvider
+      appId={config.appId}
+      userId={config.userId}
+      sdkInitParams={{
+        appStateToggleEnabled: false,
+      }}
+    >
+      <Drawer.Root direction="right" fixed>
+        <Drawer.Trigger className="relative flex h-10 flex-shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-4 text-sm font-medium shadow-sm transition-all hover:bg-[#FAFAFA] dark:bg-[#161615] dark:hover:bg-[#1A1A19] dark:text-white">
+          Open Drawer
+        </Drawer.Trigger>
+        {/* <Drawer.Portal> */}
+        <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+        <Drawer.Content
+          className="right-2 top-2 bottom-2 fixed z-10 outline-none w-[340px] flex bg-transparent"
+          style={
+            {
+              "--initial-transform": "calc(100% + 8px)",
+            } as React.CSSProperties
+          }
+        >
+          <div className="bg-white h-full w-full grow p-2 flex flex-col rounded-[16px] shadow-2xl">
+            <input
+              type="text"
+              className="w-full p-2 rounded-md"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <GroupChannelList
+              className="h-full w-full"
+              disableAutoSelect
+              onChannelCreated={() => {}}
+              onChannelSelect={(c) => c && handleSelection(c.url, c.name)}
+              channelListQueryParams={{
+                channelNameContainsFilter: search,
+              }}
+            />
           </div>
+        </Drawer.Content>
+        {/* </Drawer.Portal> */}
+      </Drawer.Root>
 
-          {/* Content */}
-          <div className="flex flex-1 overflow-hidden">
-            {/* Channel List */}
-            <div className="w-80 border-r border-gray-200">
-              <GroupChannelList
-                disableAutoSelect
-                onChannelCreated={() => {}}
-                onChannelSelect={(c) => c && handleSelection(c.url, c.name)}
-              />
-            </div>
-
-            {/* Chat Areas */}
-            <div className="flex-1 p-4 flex flex-wrap gap-4 overflow-auto">
-              {channels.map((entry) => (
-                <div
-                  className="relative w-[450px] h-[500px] border border-gray-200 rounded-lg"
-                  key={entry.key}
-                >
-                  <GroupChannel key={entry.key} channelUrl={entry.url} />
-                </div>
-              ))}
-            </div>
+      <div className="flex-1 p-4 flex flex-wrap gap-4 overflow-auto">
+        {channels.map((entry) => (
+          <div
+            className="relative w-[450px] h-[500px] border border-gray-200 rounded-lg"
+            key={entry.key}
+          >
+            <GroupChannel key={entry.key} channelUrl={entry.url} />
           </div>
-        </div>
-      </SendbirdProvider>
-    </div>
+        ))}
+      </div>
+    </SendbirdProvider>
   );
 };
