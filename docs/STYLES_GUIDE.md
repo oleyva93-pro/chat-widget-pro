@@ -1,19 +1,19 @@
-# Guía de Estilos - SendBird UI Kit
+# Styles Guide - SendBird UI Kit
 
-## 🎨 Estilos Incluidos Automáticamente
+## 🎨 Automatically Included Styles
 
-El paquete `chat-widget-sendbird` incluye automáticamente todos los estilos necesarios de SendBird UI Kit. **No necesitas importar nada adicional**.
+The `chat-widget-sendbird` package automatically includes all necessary SendBird UI Kit styles. **You don't need to import anything additional**.
 
-## ✅ Uso Correcto
+## ✅ Correct Usage
 
 ```tsx
-// ✅ CORRECTO - Los estilos se importan automáticamente
+// ✅ CORRECT - Styles are imported automatically
 import { ChatWidget, ChatWidgetProvider } from 'chat-widget-sendbird';
 
 function App() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   return (
@@ -24,25 +24,25 @@ function App() {
 }
 ```
 
-## ❌ Uso Incorrecto
+## ❌ Incorrect Usage
 
 ```tsx
-// ❌ INCORRECTO - No es necesario importar los estilos manualmente
-import '@sendbird/uikit-react/dist/index.css'; // ❌ No hacer esto
+// ❌ INCORRECT - No need to import styles manually
+import '@sendbird/uikit-react/dist/index.css'; // ❌ Don't do this
 import { ChatWidget } from 'chat-widget-sendbird';
 ```
 
-## 🔧 Cómo Funciona
+## 🔧 How It Works
 
-### 1. Estilos Incluidos en el Paquete
+### 1. Styles Included in the Package
 
-Los estilos de SendBird UI Kit se procesan y empaquetan junto con el código JavaScript:
+SendBird UI Kit styles are processed and packaged together with the JavaScript code:
 
 ```css
-/* Esto se incluye automáticamente en el paquete */
+/* This is automatically included in the package */
 @import "@sendbird/uikit-react/dist/index.css";
 
-/* Estilos adicionales del widget */
+/* Additional widget styles */
 .chat-widget-container {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -52,65 +52,65 @@ Los estilos de SendBird UI Kit se procesan y empaquetan junto con el código Jav
 }
 ```
 
-### 2. Importación Automática
+### 2. Automatic Import
 
-Cuando importas cualquier componente del paquete, los estilos se cargan automáticamente:
+When you import any component from the package, styles are loaded automatically:
 
 ```tsx
-// Solo necesitas esto
+// You only need this
 import { ChatWidget } from 'chat-widget-sendbird';
 
-// Los estilos se cargan automáticamente en el background
+// Styles are loaded automatically in the background
 ```
 
-## 🎨 Personalización de Estilos
+## 🎨 Style Customization
 
-### Variables CSS de SendBird
+### SendBird CSS Variables
 
-Puedes personalizar los colores y estilos sobrescribiendo las variables CSS de SendBird:
+You can customize colors and styles by overriding SendBird's CSS variables:
 
 ```css
-/* En tu archivo CSS global */
+/* In your global CSS file */
 :root {
-  /* Colores principales */
+  /* Primary colors */
   --sendbird-light-primary-500: #3B82F6;
   --sendbird-light-primary-600: #2563EB;
   --sendbird-light-primary-700: #1D4ED8;
   
-  /* Colores de fondo */
+  /* Background colors */
   --sendbird-light-background-50: #F8FAFC;
   --sendbird-light-background-100: #F1F5F9;
   --sendbird-light-background-200: #E2E8F0;
   
-  /* Colores de texto */
+  /* Text colors */
   --sendbird-light-onlight-01: #1E293B;
   --sendbird-light-onlight-02: #475569;
   --sendbird-light-onlight-03: #64748B;
   
-  /* Colores de borde */
+  /* Border colors */
   --sendbird-light-ondark-01: #FFFFFF;
   --sendbird-light-ondark-02: #F1F5F9;
   --sendbird-light-ondark-03: #E2E8F0;
 }
 ```
 
-### Tema Oscuro
+### Dark Theme
 
-Para usar el tema oscuro, configura el tema en el componente:
+To use the dark theme, configure the theme in the component:
 
 ```tsx
 const config = {
-  appId: "TU_SENDBIRD_APP_ID",
-  userId: "TU_USER_ID",
-  theme: "dark", // Cambiar a tema oscuro
+  appId: "YOUR_SENDBIRD_APP_ID",
+  userId: "YOUR_USER_ID",
+  theme: "dark", // Switch to dark theme
 };
 
 <ChatWidget config={config} />
 ```
 
-### Estilos Personalizados
+### Custom Styles
 
-Puedes agregar estilos personalizados usando la prop `className`:
+You can add custom styles using the `className` prop:
 
 ```tsx
 <ChatWidget 
@@ -118,40 +118,40 @@ Puedes agregar estilos personalizados usando la prop `className`:
   className="custom-chat-widget"
 />
 
-// En tu CSS
+// In your CSS
 .custom-chat-widget {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
 }
 ```
 
-## 🔍 Solución de Problemas
+## 🔍 Troubleshooting
 
-### Los estilos no se cargan
+### Styles not loading
 
-1. **Verifica que estés usando la versión correcta del paquete**
-2. **No importes manualmente los estilos de SendBird**
-3. **Asegúrate de que el paquete esté instalado correctamente**
+1. **Verify you're using the correct version of the package**
+2. **Don't manually import SendBird styles**
+3. **Make sure the package is installed correctly**
 
 ```bash
-# Reinstalar el paquete
+# Reinstall the package
 npm uninstall chat-widget-sendbird
 npm install chat-widget-sendbird
 ```
 
-### Los estilos se ven diferentes
+### Styles look different
 
-1. **Verifica que no haya conflictos con otros estilos**
-2. **Usa las variables CSS para personalizar**
-3. **Asegúrate de que Tailwind CSS esté configurado correctamente**
+1. **Check for conflicts with other styles**
+2. **Use CSS variables for customization**
+3. **Make sure Tailwind CSS is configured correctly**
 
-### Problemas de rendimiento
+### Performance issues
 
-1. **Los estilos se cargan una sola vez**
-2. **El paquete está optimizado para producción**
-3. **Los estilos se tree-shake automáticamente**
+1. **Styles are loaded only once**
+2. **The package is optimized for production**
+3. **Styles are automatically tree-shaken**
 
-## 📦 Estructura del Paquete
+## 📦 Package Structure
 
 ```
 chat-widget-sendbird/
@@ -159,31 +159,31 @@ chat-widget-sendbird/
 │   ├── index.js          # CommonJS bundle
 │   ├── index.esm.js      # ES Module bundle
 │   ├── index.umd.js      # UMD bundle
-│   ├── style.css         # Estilos procesados
+│   ├── style.css         # Processed styles
 │   └── index.d.ts        # TypeScript definitions
 └── package.json
 ```
 
-## 🚀 Mejores Prácticas
+## 🚀 Best Practices
 
-### 1. Importación Única
+### 1. Single Import
 
 ```tsx
-// ✅ Correcto
+// ✅ Correct
 import { ChatWidget, ChatWidgetProvider } from 'chat-widget-sendbird';
 
-// ❌ Incorrecto - Importaciones múltiples
+// ❌ Incorrect - Multiple imports
 import { ChatWidget } from 'chat-widget-sendbird';
 import { ChatWidgetProvider } from 'chat-widget-sendbird';
 ```
 
-### 2. Configuración Centralizada
+### 2. Centralized Configuration
 
 ```tsx
-// ✅ Correcto - Configuración reutilizable
+// ✅ Correct - Reusable configuration
 const sendBirdConfig = {
-  appId: "TU_SENDBIRD_APP_ID",
-  userId: "TU_USER_ID",
+  appId: "YOUR_SENDBIRD_APP_ID",
+  userId: "YOUR_USER_ID",
   theme: "light",
 };
 
@@ -192,29 +192,29 @@ const sendBirdConfig = {
 </ChatWidgetProvider>
 ```
 
-### 3. Personalización de Estilos
+### 3. Style Customization
 
 ```tsx
-// ✅ Correcto - Usar className para estilos personalizados
+// ✅ Correct - Use className for custom styles
 <ChatWidget 
   config={config} 
   className="my-custom-chat-widget"
 />
 
-// ❌ Incorrecto - No sobrescribir estilos directamente
+// ❌ Incorrect - Don't override styles directly
 <ChatWidget 
   config={config} 
-  style={{ /* no hacer esto */ }}
+  style={{ /* don't do this */ }}
 />
 ```
 
-## 🔧 Desarrollo Local
+## 🔧 Local Development
 
-Si estás desarrollando localmente y quieres ver los estilos:
+If you're developing locally and want to see the styles:
 
-1. **Clona el repositorio**
-2. **Instala las dependencias**
-3. **Ejecuta el servidor de desarrollo**
+1. **Clone the repository**
+2. **Install dependencies**
+3. **Run the development server**
 
 ```bash
 git clone https://github.com/oleyva93-pro/chat-widget-pro
@@ -223,10 +223,10 @@ npm install
 npm run dev
 ```
 
-Los estilos se cargarán automáticamente en el servidor de desarrollo.
+Styles will be loaded automatically in the development server.
 
-## 📚 Recursos Adicionales
+## 📚 Additional Resources
 
-- [Documentación de SendBird UI Kit](https://sendbird.com/docs/uikit/v3/react/overview)
-- [Guía de Personalización de SendBird](https://sendbird.com/docs/uikit/v3/react/guides/theming)
-- [Variables CSS de SendBird](https://sendbird.com/docs/uikit/v3/react/guides/theming#css-variables) 
+- [SendBird UI Kit Documentation](https://sendbird.com/docs/uikit/v3/react/overview)
+- [SendBird Customization Guide](https://sendbird.com/docs/uikit/v3/react/guides/theming)
+- [SendBird CSS Variables](https://sendbird.com/docs/uikit/v3/react/guides/theming#css-variables) 

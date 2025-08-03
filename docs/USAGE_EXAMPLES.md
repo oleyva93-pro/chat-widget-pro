@@ -1,29 +1,29 @@
-# Ejemplos de Uso - Chat Widget Modular
+# Usage Examples - Modular Chat Widget
 
-## 🎯 Casos de Uso Comunes
+## 🎯 Common Use Cases
 
-### 1. Widget Completo (Uso Básico)
+### 1. Complete Widget (Basic Usage)
 
 ```tsx
 import { ChatWidgetProvider, ChatWidget } from '@your-company/chat-widget';
 
 function App() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
     position: "bottom-right",
     showUnreadBadge: true,
   };
 
   return (
     <ChatWidgetProvider config={config}>
-      <ChatWidget config={config} />
+      <ChatWidget />
     </ChatWidgetProvider>
   );
 }
 ```
 
-### 2. Solo Icono de Chat
+### 2. Chat Icon Only
 
 ```tsx
 import { ChatIcon } from '@your-company/chat-widget';
@@ -34,7 +34,7 @@ function Header() {
 
   return (
     <header className="flex items-center justify-between p-4">
-      <h1>Mi Aplicación</h1>
+      <h1>My Application</h1>
       <ChatIcon
         unreadCount={unreadCount}
         onClick={() => setIsChatOpen(!isChatOpen)}
@@ -46,20 +46,20 @@ function Header() {
 }
 ```
 
-### 3. Lista de Chats Personalizada
+### 3. Custom Chat List
 
 ```tsx
 import { ChatList } from '@your-company/chat-widget';
 
 function ChatSidebar() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   const handleChannelSelect = (channel) => {
-    console.log('Canal seleccionado:', channel);
-    // Navegar al chat o abrir en nueva ventana
+    console.log('Selected channel:', channel);
+    // Navigate to chat or open in new window
   };
 
   return (
@@ -74,22 +74,22 @@ function ChatSidebar() {
 }
 ```
 
-### 4. Ventana de Chat Independiente
+### 4. Independent Chat Window
 
 ```tsx
 import { ChatWindow } from '@your-company/chat-widget';
 
 function ChatPage() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   const [selectedChannel, setSelectedChannel] = useState(null);
 
   return (
     <div className="h-screen flex">
-      {/* Sidebar con lista de canales */}
+      {/* Sidebar with channel list */}
       <div className="w-80 border-r">
         <ChannelList
           config={config}
@@ -97,7 +97,7 @@ function ChatPage() {
         />
       </div>
 
-      {/* Área de chat */}
+      {/* Chat area */}
       <div className="flex-1">
         <ChatWindow
           config={config}
@@ -110,15 +110,15 @@ function ChatPage() {
 }
 ```
 
-### 5. Widget con Estado Personalizado
+### 5. Widget with Custom State
 
 ```tsx
 import { ChatWidgetProvider, useChatWidget, ChatIcon } from '@your-company/chat-widget';
 
 function CustomChatWidget() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   return (
@@ -161,7 +161,7 @@ function CustomChatInterface() {
                 />
               ) : (
                 <div className="flex items-center justify-center h-full text-gray-500">
-                  Selecciona un canal para chatear
+                  Select a channel to chat
                 </div>
               )}
             </div>
@@ -173,15 +173,15 @@ function CustomChatInterface() {
 }
 ```
 
-### 6. Múltiples Ventanas de Chat
+### 6. Multiple Chat Windows
 
 ```tsx
 import { ChatWindow } from '@your-company/chat-widget';
 
 function MultiChatInterface() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   const [openChats, setOpenChats] = useState([]);
@@ -196,7 +196,7 @@ function MultiChatInterface() {
 
   return (
     <div className="h-screen flex">
-      {/* Lista de canales */}
+      {/* Channel list */}
       <div className="w-80 border-r">
         <ChatList
           config={config}
@@ -204,7 +204,7 @@ function MultiChatInterface() {
         />
       </div>
 
-      {/* Ventanas de chat múltiples */}
+      {/* Multiple chat windows */}
       <div className="flex-1 flex flex-wrap gap-4 p-4 overflow-auto">
         {openChats.map((chat) => (
           <div key={chat.url} className="relative w-[400px] h-[500px] border rounded-lg">
@@ -227,15 +227,15 @@ function MultiChatInterface() {
 }
 ```
 
-### 7. Hook de Mensajes No Leídos
+### 7. Unread Messages Hook
 
 ```tsx
 import { useUnreadMessages } from '@your-company/chat-widget';
 
 function NotificationBadge() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   const unreadCount = useUnreadMessages(config);
@@ -244,13 +244,13 @@ function NotificationBadge() {
 
   return (
     <div className="bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-      {unreadCount} mensajes nuevos
+      {unreadCount} new messages
     </div>
   );
 }
 ```
 
-### 8. Integración con React Router
+### 8. React Router Integration
 
 ```tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -258,8 +258,8 @@ import { ChatWidgetProvider, ChatWindow } from '@your-company/chat-widget';
 
 function App() {
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   return (
@@ -289,14 +289,14 @@ function ChatPage() {
 }
 ```
 
-## 🎨 Personalización Avanzada
+## 🎨 Advanced Customization
 
-### Tema Personalizado
+### Custom Theme
 
 ```tsx
 const config = {
-  appId: "TU_SENDBIRD_APP_ID",
-  userId: "TU_USER_ID",
+  appId: "YOUR_SENDBIRD_APP_ID",
+  userId: "YOUR_USER_ID",
   theme: "dark",
   customTheme: {
     '--sendbird-light-primary-500': '#3B82F6',
@@ -306,19 +306,19 @@ const config = {
 };
 ```
 
-### Posiciones Personalizadas
+### Custom Positions
 
 ```tsx
-// Widget en la esquina superior izquierda
+// Widget in top-left corner
 <ChatWidget config={{ ...config, position: "top-left" }} />
 
-// Widget en el centro de la pantalla
+// Widget in center of screen
 <div className="fixed inset-0 flex items-center justify-center z-50">
   <ChatWidget config={config} className="relative" />
 </div>
 ```
 
-### Estilos Personalizados
+### Custom Styles
 
 ```tsx
 <ChatIcon
@@ -328,7 +328,7 @@ const config = {
   size="xl"
 />
 
-// CSS personalizado
+// Custom CSS
 .custom-chat-icon {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
@@ -339,51 +339,51 @@ const config = {
 }
 ```
 
-## 🔧 Configuración Avanzada
+## 🔧 Advanced Configuration
 
-### Callbacks de Eventos
+### Event Callbacks
 
 ```tsx
 const config = {
-  appId: "TU_SENDBIRD_APP_ID",
-  userId: "TU_USER_ID",
+  appId: "YOUR_SENDBIRD_APP_ID",
+  userId: "YOUR_USER_ID",
   onMessageReceived: (message) => {
-    // Mostrar notificación push
-    showNotification('Nuevo mensaje', message.message);
+    // Show push notification
+    showNotification('New message', message.message);
   },
   onChannelChanged: (channel) => {
-    // Actualizar URL o estado
+    // Update URL or state
     navigate(`/chat/${channel.url}`);
   },
   onUserConnected: (user) => {
-    console.log('Usuario conectado:', user);
+    console.log('User connected:', user);
   },
   onUserDisconnected: (user) => {
-    console.log('Usuario desconectado:', user);
+    console.log('User disconnected:', user);
   },
 };
 ```
 
-### Manejo de Errores
+### Error Handling
 
 ```tsx
 function ChatWithErrorHandling() {
   const [error, setError] = useState(null);
 
   const config = {
-    appId: "TU_SENDBIRD_APP_ID",
-    userId: "TU_USER_ID",
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "YOUR_USER_ID",
   };
 
   if (error) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-        <p className="text-red-800">Error de conexión: {error}</p>
+        <p className="text-red-800">Connection error: {error}</p>
         <button 
           onClick={() => setError(null)}
           className="mt-2 px-4 py-2 bg-red-500 text-white rounded"
         >
-          Reintentar
+          Retry
         </button>
       </div>
     );
