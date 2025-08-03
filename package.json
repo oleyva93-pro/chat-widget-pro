@@ -44,7 +44,12 @@
     "@sendbird/chat": "^4.19.6",
     "@sendbird/uikit-react": "^3.17.0",
     "@tailwindcss/vite": "^4.1.11",
-    "chat-widget-sendbird": "^1.2.5",
+    "chat-widget-sendbird": "^1.2.7",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.536.0",
+    "react-rnd": "^10.5.2",
+    "tailwind-merge": "^3.3.1",
+    "use-debounce": "^10.0.5",
     "vaul": "^1.1.2"
   },
   "devDependencies": {

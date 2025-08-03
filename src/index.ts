@@ -2,18 +2,15 @@
 import "./styles/index.css";
 
 // Main widget component
-export { ChatWidget } from "./components/ChatWidget";
+export { ChatWidget } from "./components/chat-widget";
 
 // Individual components for modular use
-export { ChatIcon } from "./components/ChatIcon";
-export { ChatList } from "./components/ChatList";
-export { ChannelList } from "./components/ChannelList";
-export { ChatWindow } from "./components/ChatWindow";
+export { ChatList } from "./components/chat-list";
 
 // Provider and hooks
-export { ChatWidgetProvider } from "./providers/ChatWidgetProvider";
-export { useChatWidget } from "./hooks/useChatWidget";
-export { useUnreadMessages } from "./hooks/useUnreadMessages";
+export { ChatWidgetProvider } from "./providers/chat-widget-provider";
+export { useChatWidget } from "./hooks/use-chat-widget";
+export { useUnreadMessages } from "./hooks/use-unread-messages";
 
 // Types
 export type {
@@ -24,6 +21,5 @@ export type {
   ChannelListProps,
   ChatWindowProps,
   ChatWidgetProps,
-  ChatWidgetState,
   ChatWidgetProviderProps,
 } from "./types";

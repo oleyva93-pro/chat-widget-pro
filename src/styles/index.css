@@ -23,3 +23,21 @@
 .sendbird-channel {
   height: 100%;
 } 
+
+.sendbird-channel-list__header {
+  height: unset !important;
+  min-height: unset !important;
+}
+
+.sendbird-channel-profile__edit {
+  display: none;
+}
+
+.sendbird-channel-settings-accordion__footer {
+  display: none !important;
+}
+
+.sendbird-theme--light .sendbird-conversation {
+  background-color: var(--sendbird-light-background-50);
+  border: none !important;
+}
