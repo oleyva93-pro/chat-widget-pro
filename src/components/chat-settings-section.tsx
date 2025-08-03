@@ -15,6 +15,7 @@ export const ChatSettingsSection = ({
   return (
     <ChannelSettings
       channelUrl={channelUrl}
+      className="rounded-xl"
       renderUserProfile={(props) => <UserProfile {...props} disableMessaging />}
       renderLeaveChannel={() => <></>}
       renderUserListItem={(props) => (
@@ -46,6 +47,7 @@ export const ChatSettingsSection = ({
       renderHeader={() => (
         <Header
           renderMiddle={() => <Header.Title title="Info" />}
+          className="rounded-t-xl"
           renderRight={() => (
             <Header.IconButton
               type="CLOSE"

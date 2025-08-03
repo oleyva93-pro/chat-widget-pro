@@ -22,7 +22,7 @@ export const Chat: React.FC<ChatWindowProps> = memo(({ channelUrl }) => {
         />
 
         {showSettings && (
-          <div className="absolute top-0 right-0 w-full h-full bg-black/50 flex justify-end">
+          <div className="absolute top-0 right-0 w-full h-full bg-black/50 flex justify-end rounded-xl">
             <ChatSettingsSection
               channelUrl={channelUrl}
               onClose={() => setShowSettings(false)}

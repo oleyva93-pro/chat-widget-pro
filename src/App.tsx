@@ -1,6 +1,6 @@
-import { ChatWidget, ChatWidgetProvider } from "chat-widget-sendbird";
+// import { ChatWidget, ChatWidgetProvider } from "chat-widget-sendbird";
 import "chat-widget-sendbird/dist/style.css";
-// import { ChatWidget, ChatWidgetProvider } from "./index";
+import { ChatWidget, ChatWidgetProvider } from "./index";
 
 import "./index.css";
 
