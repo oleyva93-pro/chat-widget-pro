@@ -21,10 +21,14 @@ export const ChatList: React.FC<ChannelListProps> = ({
         <section className="">
           <header className="border-b border-gray-200 p-4 flex justify-between items-center">
             <section>
-              <h3 className="text-xl">Chats</h3>
+              <h3 className="text-xl text-black">Chats</h3>
             </section>
             <section className="hover:bg-gray-100 rounded-full p-1">
-              <X className="w-5 h-5 cursor-pointer" onClick={onClose} />
+              <X
+                className="w-5 h-5 cursor-pointer "
+                color="black"
+                onClick={onClose}
+              />
             </section>
           </header>
           <section className="p-4">
