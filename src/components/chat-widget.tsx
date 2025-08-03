@@ -1,4 +1,6 @@
 import "@sendbird/uikit-react/dist/index.css";
+import "../styles/index.css";
+
 import React, { useCallback, useState } from "react";
 
 import { useChatWidget } from "../hooks/use-chat-widget";
