@@ -52,9 +52,7 @@
     "react-rnd": "^10.5.2",
     "react-tooltip": "^5.29.1",
     "tailwind-merge": "^3.3.1",
-    "use-debounce": "^10.0.5",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "use-debounce": "^10.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -73,6 +71,8 @@
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
-    "vite": "^5.0.0"
+    "vite": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }
