@@ -8,6 +8,7 @@ import "react-tooltip/dist/react-tooltip.css";
 
 import { useChannelData } from "../hooks/use-channel";
 import { useChatWidget } from "../hooks/use-chat-widget";
+import { cn } from "../lib/utils";
 
 export function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { channel, name } = useChannelData();
@@ -15,6 +16,7 @@ export function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { handleMinimizeChat, handleCloseChat } = useChatWidget();
 
   const [showCloseButton, setShowCloseButton] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
   const currentUser = state.config.userId;
 
@@ -26,12 +28,24 @@ export function FloatingChat({ channelUrl }: { channelUrl: string }) {
       ? channel?.lastMessage?.sender?.nickname
       : "Unknown";
 
+  function handleToggle() {
+    setToggle((prev) => !prev);
+    setTimeout(() => {
+      handleMinimizeChat(channelUrl);
+    }, 200);
+  }
+
   return (
-    <section className="relative">
+    <section
+      className={cn(
+        "relative",
+        toggle ? "animate-fade-in" : "animate-fade-out"
+      )}
+    >
       <div
         data-tooltip-id={channelUrl}
         className="bg-gray-200 relative cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
-        onClick={() => handleMinimizeChat(channelUrl)}
+        onClick={handleToggle}
         onMouseEnter={() => setShowCloseButton(true)}
         onMouseLeave={() => setShowCloseButton(false)}
       >

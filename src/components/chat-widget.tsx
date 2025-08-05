@@ -22,8 +22,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
     handleCloseAllChats,
   } = useChatWidget();
 
-  const minimizedCount = minimizedChannels.length;
-
   return (
     <div className="flex flex-row h-screen">
       <ChatList onChannelSelect={handleSelection} onClose={onClose} />
@@ -32,7 +30,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
         {maximizedChannels.map((entry, index) => (
           <Chat
             key={entry.key}
-            index={minimizedCount ? index + 0.5 : index}
+            index={index + 0.3}
             channelUrl={entry.url}
             onCloseChat={() => handleCloseChat(entry.url)}
             onMinimizeChat={() => handleMinimizeChat(entry.url)}

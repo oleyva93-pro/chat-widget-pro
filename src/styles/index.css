@@ -29,6 +29,32 @@
   .animate-skBouncedelay {
     animation: skBouncedelay 1.4s infinite ease-in-out both;
   }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-in-out forwards;
+  }
+
+  .animate-fade-out {
+    animation: fadeOut 0.2s ease-in-out forwards;
+  }
 }
 
 /* Custom widget styles */

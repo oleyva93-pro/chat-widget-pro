@@ -52,7 +52,7 @@ function ChanelSection({
   const isPending = channelStatus === ChannelStatus.PENDING;
 
   return (
-    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200">
+    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200 animate-fade-in">
       <GroupChannel
         channelUrl={channelUrl}
         key={channelUrl}
