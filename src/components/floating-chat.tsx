@@ -1,13 +1,13 @@
 import { useSendbird } from "@sendbird/uikit-react";
+import Badge from "@sendbird/uikit-react/ui/Badge";
 import ChannelAvatar from "@sendbird/uikit-react/ui/ChannelAvatar";
+import { X } from "lucide-react";
+import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
 import { useChannelData } from "../hooks/use-channel";
 import { useChatWidget } from "../hooks/use-chat-widget";
-import Badge from "@sendbird/uikit-react/ui/Badge";
-import { X } from "lucide-react";
-import { useState } from "react";
 
 export function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { channel, name } = useChannelData();
@@ -19,9 +19,12 @@ export function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const currentUser = state.config.userId;
 
   const nickname =
+    channel?.lastMessage?.isUserMessage() &&
     channel?.lastMessage?.sender?.userId === currentUser
       ? "You"
-      : channel?.lastMessage?.sender?.nickname;
+      : channel?.lastMessage?.isUserMessage()
+      ? channel?.lastMessage?.sender?.nickname
+      : "Unknown";
 
   return (
     <section className="relative">
