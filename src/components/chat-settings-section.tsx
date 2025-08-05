@@ -68,7 +68,7 @@ export const ChatSettingsSection = ({
               type="CLOSE"
               onClick={onClose}
               renderIcon={() => (
-                <X className="w-5.5 h-5.5 text-primary" strokeWidth={2.8} />
+                <X className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
               )}
             />
           )}

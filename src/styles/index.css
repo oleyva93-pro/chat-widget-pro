@@ -9,7 +9,7 @@
 @import "tailwindcss/utilities.css" layer(custom-utilities);
 
 @theme {
-  --color-primary: var(--sendbird-light-primary-300);
+  --color-chw-primary: var(--sendbird-light-primary-300);
 }
 
 @layer custom-utilities {

@@ -23,7 +23,7 @@ function ChatHeader({
             className="rounded-full p-1 hover:bg-gray-100"
             onClick={onInfoClick}
           >
-            <Info className="w-5.5 h-5.5 text-primary" strokeWidth={2.8} />
+            <Info className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
           </div>
         </TooltipWrapper>
         <TooltipWrapper
@@ -35,7 +35,7 @@ function ChatHeader({
             className="rounded-full p-1 hover:bg-gray-100"
             onClick={onMinusClick}
           >
-            <Minus className="w-5.5 h-5.5 text-primary" strokeWidth={2.8} />
+            <Minus className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
           </div>
         </TooltipWrapper>
         <TooltipWrapper hoverTooltip={<Tooltip>Close chat</Tooltip>}>
@@ -43,7 +43,7 @@ function ChatHeader({
             className="rounded-full p-1 hover:bg-gray-100"
             onClick={onXClick}
           >
-            <X className="w-5.5 h-5.5 text-primary" strokeWidth={2.8} />
+            <X className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
           </div>
         </TooltipWrapper>
       </div>
