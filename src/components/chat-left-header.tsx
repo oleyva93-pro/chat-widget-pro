@@ -18,7 +18,7 @@ export const ChatLeftHeader = ({ className }: { className?: string }) => {
       />
       <div className="flex flex-col">
         <span className="text-xs text-gray-500">WO# {data?.wo}</span>
-        <span className="text-sm font-medium">{name}</span>
+        <span className="text-sm font-medium text-black">{name}</span>
       </div>
     </div>
   );
