@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 
 import type { ChannelListProps } from "../types";
 import { SearchInput } from "./ui/search-input";
+import { PublicChannelFilter } from "@sendbird/chat/groupChannel";
 
 export const ChatList: React.FC<ChannelListProps> = ({
   onChannelSelect,
@@ -44,6 +45,9 @@ export const ChatList: React.FC<ChannelListProps> = ({
       )}
       channelListQueryParams={{
         channelNameContainsFilter: value,
+        includeEmpty: true,
+        limit: 100,
+        publicChannelFilter: PublicChannelFilter.PUBLIC,
       }}
       onChannelSelect={(channel) => {
         if (channel && onChannelSelect) {

@@ -26,7 +26,7 @@ export interface ChatIconProps {
   className?: string;
 }
 
-export type ChannelType = GroupChannel;
+export type ChannelType = GroupChannel | null;
 
 export interface ChatListProps {
   config: SendBirdConfig;
@@ -42,10 +42,23 @@ export interface ChannelListProps {
 
 export interface ChatWindowProps {
   channelUrl?: string;
+  index: number;
+  onCloseChat?: () => void;
+  onMinimizeChat?: () => void;
+  minimized?: boolean;
+}
+
+export interface ChannelEntry {
+  url: string;
+  minimized?: boolean;
+  key: string;
 }
 
 export interface ChatWidgetContextType {
-  unReactiveOpenChats: React.RefObject<string[]>;
+  channels: ChannelEntry[];
+  handleSelection: (channel: ChannelType) => void;
+  handleCloseChat: (url: string) => void;
+  handleMinimizeChat: (url: string) => void;
 }
 
 // Provider props
@@ -53,3 +66,24 @@ export interface ChatWidgetProviderProps {
   children: React.ReactNode;
   config: ChatWidgetConfig;
 }
+
+export interface ChatSize {
+  width: number;
+  height: number;
+}
+
+export const ChannelStatus = {
+  COMPLETED: "completed",
+  PENDING: "pending",
+  ACTIVE: "active",
+} as const;
+
+export const DEFAULT_CHAT_SIZE = {
+  width: 330,
+  height: 500,
+  gap: 20,
+  minWidth: 300,
+  maxWidth: 800,
+  minHeight: 300,
+  maxHeight: 800,
+} as const;

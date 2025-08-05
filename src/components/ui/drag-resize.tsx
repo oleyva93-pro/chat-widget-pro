@@ -2,21 +2,20 @@ import "@sendbird/uikit-react/dist/index.css";
 import React, { useCallback, useState } from "react";
 import { Rnd } from "react-rnd";
 
-import { useChatWidget } from "../../hooks/use-chat-widget";
+import { DEFAULT_CHAT_SIZE, type ChatSize } from "../../types";
 
-const DEFAULT_SIZE = {
-  width: 500,
-  height: 500,
-};
-
-export function DragResize({ children }: { children: React.ReactNode }) {
-  const { unReactiveOpenChats } = useChatWidget();
-
-  const chatsOpens = unReactiveOpenChats.current.length;
-
-  const [size, setSize] = useState({
-    width: DEFAULT_SIZE.width,
-    height: DEFAULT_SIZE.height,
+export function DragResize({
+  children,
+  index,
+  minimized,
+}: {
+  children: React.ReactNode;
+  index: number;
+  minimized?: boolean;
+}) {
+  const [size, setSize] = useState<ChatSize>({
+    width: DEFAULT_CHAT_SIZE.width,
+    height: DEFAULT_CHAT_SIZE.height,
   });
 
   const handleResize = useCallback(
@@ -41,22 +40,21 @@ export function DragResize({ children }: { children: React.ReactNode }) {
       default={{
         x:
           window.innerWidth -
-          DEFAULT_SIZE.width -
-          320 * (chatsOpens == 1 ? chatsOpens : chatsOpens + 1),
-        y: window.innerHeight - DEFAULT_SIZE.height - 20,
-        width: DEFAULT_SIZE.width,
-        height: DEFAULT_SIZE.height,
+          (DEFAULT_CHAT_SIZE.width + DEFAULT_CHAT_SIZE.gap) * (index + 1.9),
+        y: window.innerHeight - DEFAULT_CHAT_SIZE.height,
+        width: DEFAULT_CHAT_SIZE.width,
+        height: DEFAULT_CHAT_SIZE.height,
       }}
-      minWidth={300}
-      maxWidth={800}
-      minHeight={300}
-      maxHeight={800}
+      minWidth={DEFAULT_CHAT_SIZE.minWidth}
+      maxWidth={DEFAULT_CHAT_SIZE.maxWidth}
+      minHeight={DEFAULT_CHAT_SIZE.minHeight}
+      maxHeight={DEFAULT_CHAT_SIZE.maxHeight}
       enableResizing
       onResize={handleResize}
       bounds="window"
     >
       <div
-        className="relative rounded-lg box"
+        className="relative rounded-lg"
         style={{ width: size.width, height: size.height }}
       >
         {children}
