@@ -1,6 +1,7 @@
 /* Import SendBird UI Kit styles */
 @import "@sendbird/uikit-react/dist/index.css";
 @import "tailwindcss";
+@import 'react-tooltip/dist/react-tooltip.css';
 
 @theme {
   --color-primary: var(--sendbird-light-primary-300);

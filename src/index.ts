@@ -1,5 +1,6 @@
 // Import styles
 import "./styles/index.css";
+import "react-tooltip/dist/react-tooltip.css";
 
 // Main widget component
 export { ChatWidget } from "./components/chat-widget";

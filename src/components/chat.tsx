@@ -4,27 +4,26 @@ import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context
 import React, { memo, useState } from "react";
 
 import { useChannelData } from "../hooks/use-channel";
-import { cn, getChannelStatus } from "../lib/utils";
+import { getChannelStatus } from "../lib/utils";
 import { ChannelStatus, type ChatWindowProps } from "../types";
+import ChatHeader from "./chat-header";
 import { ChatSettingsSection } from "./chat-settings-section";
 import { GroupMessageList } from "./group-message-list";
 import { DragResize } from "./ui/drag-resize";
-import ChatHeader from "./chat-header";
 
 export const Chat: React.FC<ChatWindowProps> = memo(
-  ({ channelUrl, index, onCloseChat, onMinimizeChat, minimized }) => {
+  ({ channelUrl, index, onCloseChat, onMinimizeChat }) => {
     if (!channelUrl) {
       return null;
     }
 
     return (
-      <DragResize index={index} minimized={minimized}>
+      <DragResize index={index}>
         <GroupChannelProvider channelUrl={channelUrl}>
           <ChanelSection
             channelUrl={channelUrl}
             onCloseChat={onCloseChat}
             onMinimizeChat={onMinimizeChat}
-            minimized={minimized}
           />
         </GroupChannelProvider>
       </DragResize>
@@ -36,12 +35,10 @@ function ChanelSection({
   channelUrl,
   onCloseChat,
   onMinimizeChat,
-  minimized,
 }: {
   channelUrl: string;
   onCloseChat?: () => void;
   onMinimizeChat?: () => void;
-  minimized?: boolean;
 }) {
   const [showSettings, setShowSettings] = useState(false);
   const channelData = useChannelData();
@@ -55,14 +52,7 @@ function ChanelSection({
   const isPending = channelStatus === ChannelStatus.PENDING;
 
   return (
-    <div
-      className={cn(
-        "relative w-full rounded-xl bg-white p-1 border border-gray-200",
-        {
-          "h-full": !minimized,
-        }
-      )}
-    >
+    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200">
       <GroupChannel
         channelUrl={channelUrl}
         key={channelUrl}

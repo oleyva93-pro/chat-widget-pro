@@ -7,11 +7,9 @@ import { DEFAULT_CHAT_SIZE, type ChatSize } from "../../types";
 export function DragResize({
   children,
   index,
-  minimized,
 }: {
   children: React.ReactNode;
   index: number;
-  minimized?: boolean;
 }) {
   const [size, setSize] = useState<ChatSize>({
     width: DEFAULT_CHAT_SIZE.width,
@@ -49,7 +47,6 @@ export function DragResize({
       maxWidth={DEFAULT_CHAT_SIZE.maxWidth}
       minHeight={DEFAULT_CHAT_SIZE.minHeight}
       maxHeight={DEFAULT_CHAT_SIZE.maxHeight}
-      enableResizing
       onResize={handleResize}
       bounds="window"
     >

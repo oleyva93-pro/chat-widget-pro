@@ -56,9 +56,12 @@ export interface ChannelEntry {
 
 export interface ChatWidgetContextType {
   channels: ChannelEntry[];
+  maximizedChannels: ChannelEntry[];
+  minimizedChannels: ChannelEntry[];
   handleSelection: (channel: ChannelType) => void;
   handleCloseChat: (url: string) => void;
   handleMinimizeChat: (url: string) => void;
+  handleCloseAllChats: () => void;
 }
 
 // Provider props

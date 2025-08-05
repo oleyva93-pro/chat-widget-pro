@@ -46,6 +46,8 @@ export function useGetChannel(channelUrl: string) {
     queryFn: () => getChannelFn(channelUrl),
   });
 
+  console.log(currentChannel);
+
   return {
     channel: currentChannel,
     data:

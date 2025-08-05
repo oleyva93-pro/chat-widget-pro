@@ -22,19 +22,32 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
     [channels]
   );
 
+  const maximizedChannels = useMemo(() => {
+    return channelsArray.filter((channel) => !channel.minimized);
+  }, [channelsArray]);
+
+  const minimizedChannels = useMemo(() => {
+    return channelsArray.filter((channel) => channel.minimized);
+  }, [channelsArray]);
+
   const handleSelection = useCallback((c: ChannelType) => {
     if (!c) return;
 
     const { url } = c;
 
     setChannels((prev) => {
-      if (prev.get(url)) return prev;
+      if (prev.get(url)) {
+        const channel = prev.get(url);
+        if (!channel?.minimized) {
+          return prev;
+        }
+      }
 
       const channelsOpen = new Map(prev);
       channelsOpen.set(url, {
         url,
         key: `${url}-${Date.now()}`,
-        minimized: true,
+        minimized: false,
       });
 
       return channelsOpen;
@@ -61,15 +74,22 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
     });
   }, []);
 
+  const handleCloseAllChats = useCallback(() => {
+    setChannels(new Map());
+  }, []);
+
   return (
     <SBProvider config={config}>
       <RQProvider>
         <ChatWidgetContext.Provider
           value={{
             channels: channelsArray,
+            maximizedChannels,
+            minimizedChannels,
             handleSelection,
             handleCloseChat,
             handleMinimizeChat,
+            handleCloseAllChats,
           }}
         >
           {children}
