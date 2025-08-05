@@ -4,17 +4,28 @@ import { X } from "lucide-react";
 import React, { memo, useState } from "react";
 import { useDebounce } from "use-debounce";
 
-import type { ChannelListProps } from "../types";
+import type { ChannelListProps, ChannelType } from "../types";
 import { SearchInput } from "./ui/search-input";
+import { useChatWidget } from "../hooks/use-chat-widget";
 
 export const ChatList: React.FC<ChannelListProps> = memo(
-  ({ onChannelSelect, onClose }) => {
+  ({ onChannelSelect, onClose, className }) => {
     const [search, setSearch] = useState("");
     const [value] = useDebounce(search, 500);
+
+    const { handleSelection } = useChatWidget();
+
+    function handleChannelSelect(channel: ChannelType) {
+      if (channel) {
+        handleSelection(channel);
+        onChannelSelect?.(channel);
+      }
+    }
 
     return (
       <GroupChannelList
         disableAutoSelect
+        className={className}
         onChannelCreated={() => {}}
         renderHeader={() => (
           <section className="">
@@ -47,11 +58,7 @@ export const ChatList: React.FC<ChannelListProps> = memo(
           limit: 100,
           publicChannelFilter: PublicChannelFilter.PUBLIC,
         }}
-        onChannelSelect={(channel) => {
-          if (channel && onChannelSelect) {
-            onChannelSelect(channel);
-          }
-        }}
+        onChannelSelect={handleChannelSelect}
       />
     );
   }

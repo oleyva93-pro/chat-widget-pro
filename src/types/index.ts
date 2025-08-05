@@ -8,7 +8,7 @@ export interface SendBirdConfig {
 
 // Widget configuration
 export interface ChatWidgetProps {
-  onClose?: () => void;
+  key?: string;
 }
 export interface ChatWidgetConfig extends SendBirdConfig {
   onChannelChanged?: (channel: ChannelType) => void;

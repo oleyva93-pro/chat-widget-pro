@@ -1,19 +1,17 @@
-import React from "react";
 import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
 import { X } from "lucide-react";
+import React, { memo } from "react";
 import { Tooltip } from "react-tooltip";
 
 import { useChatWidget } from "../hooks/use-chat-widget";
 import type { ChatWidgetProps } from "../types";
 import { Chat } from "./chat";
-import { ChatList } from "./chat-list";
 import FloatingChat from "./floating-chat";
 
-export const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
+export const ChatWidget: React.FC<ChatWidgetProps> = memo(() => {
   const {
     maximizedChannels,
     minimizedChannels,
-    handleSelection,
     handleCloseChat,
     handleMinimizeChat,
     handleCloseAllChats,
@@ -21,19 +19,15 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
 
   return (
     <div className="flex flex-row h-screen">
-      <ChatList onChannelSelect={handleSelection} onClose={onClose} />
-
-      <div className="flex-1 p-4 flex flex-wrap gap-4 overflow-auto w-full">
-        {maximizedChannels.map((entry, index) => (
-          <Chat
-            key={entry.key}
-            index={index + 0.3}
-            channelUrl={entry.url}
-            onCloseChat={() => handleCloseChat(entry.url)}
-            onMinimizeChat={() => handleMinimizeChat(entry.url)}
-          />
-        ))}
-      </div>
+      {maximizedChannels.map((entry, index) => (
+        <Chat
+          key={entry.key}
+          index={index + 0.3}
+          channelUrl={entry.url}
+          onCloseChat={() => handleCloseChat(entry.url)}
+          onMinimizeChat={() => handleMinimizeChat(entry.url)}
+        />
+      ))}
 
       <div className="fixed bottom-10 right-6 flex flex-col gap-4 items-center">
         {minimizedChannels.length > 1 ? (
@@ -62,4 +56,4 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
       </div>
     </div>
   );
-};
+});

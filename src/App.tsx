@@ -1,4 +1,4 @@
-import { ChatWidget, ChatWidgetProvider } from "./index";
+import { ChatList, ChatWidget, ChatWidgetProvider } from "./index";
 
 import "./index.css";
 
@@ -14,7 +14,10 @@ function App() {
   return (
     <div className="min-h-screen bg-zinc-800">
       <ChatWidgetProvider config={config}>
-        <ChatWidget />
+        <div className="flex flex-row h-screen">
+          <ChatList />
+          <ChatWidget />
+        </div>
       </ChatWidgetProvider>
     </div>
   );
