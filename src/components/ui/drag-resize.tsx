@@ -1,4 +1,3 @@
-import "@sendbird/uikit-react/dist/index.css";
 import React, { useCallback, useState } from "react";
 import { Rnd } from "react-rnd";
 

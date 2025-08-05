@@ -1,16 +1,13 @@
-import "@sendbird/uikit-react/dist/index.css";
-import "../styles/index.css";
-
 import React from "react";
+import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
+import { X } from "lucide-react";
+import { Tooltip } from "react-tooltip";
 
 import { useChatWidget } from "../hooks/use-chat-widget";
 import type { ChatWidgetProps } from "../types";
 import { Chat } from "./chat";
 import { ChatList } from "./chat-list";
-import { FloatingChat } from "./floating-chat";
-import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
-import { X } from "lucide-react";
-import { Tooltip } from "react-tooltip";
+import FloatingChat from "./floating-chat";
 
 export const ChatWidget: React.FC<ChatWidgetProps> = ({ onClose }) => {
   const {

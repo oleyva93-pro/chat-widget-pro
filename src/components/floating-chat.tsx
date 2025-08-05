@@ -2,15 +2,14 @@ import { useSendbird } from "@sendbird/uikit-react";
 import Badge from "@sendbird/uikit-react/ui/Badge";
 import ChannelAvatar from "@sendbird/uikit-react/ui/ChannelAvatar";
 import { X } from "lucide-react";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Tooltip } from "react-tooltip";
-import "react-tooltip/dist/react-tooltip.css";
 
 import { useChannelData } from "../hooks/use-channel";
 import { useChatWidget } from "../hooks/use-chat-widget";
 import { cn } from "../lib/utils";
 
-export function FloatingChat({ channelUrl }: { channelUrl: string }) {
+function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { channel, name } = useChannelData();
   const { state } = useSendbird();
   const { handleMinimizeChat, handleCloseChat } = useChatWidget();
@@ -81,3 +80,5 @@ export function FloatingChat({ channelUrl }: { channelUrl: string }) {
     </section>
   );
 }
+
+export default memo(FloatingChat);

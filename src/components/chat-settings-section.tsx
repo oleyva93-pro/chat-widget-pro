@@ -1,6 +1,5 @@
 import { ChannelSettings, useSendbird } from "@sendbird/uikit-react";
 import ChannelSettingMenuList from "@sendbird/uikit-react/ChannelSettings/components/ChannelSettingMenuList";
-import "@sendbird/uikit-react/dist/index.css";
 import Header from "@sendbird/uikit-react/ui/Header";
 import UserListItem from "@sendbird/uikit-react/ui/UserListItem";
 import UserProfile from "@sendbird/uikit-react/ui/UserProfile";

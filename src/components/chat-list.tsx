@@ -1,11 +1,11 @@
+import { PublicChannelFilter } from "@sendbird/chat/groupChannel";
 import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
+import { X } from "lucide-react";
 import React, { memo, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { X } from "lucide-react";
 
 import type { ChannelListProps } from "../types";
 import { SearchInput } from "./ui/search-input";
-import { PublicChannelFilter } from "@sendbird/chat/groupChannel";
 
 export const ChatList: React.FC<ChannelListProps> = memo(
   ({ onChannelSelect, onClose }) => {

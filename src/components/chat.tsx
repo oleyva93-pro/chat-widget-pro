@@ -1,4 +1,3 @@
-import "@sendbird/uikit-react/dist/index.css";
 import GroupChannel from "@sendbird/uikit-react/GroupChannel";
 import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
 import React, { memo, useState } from "react";
