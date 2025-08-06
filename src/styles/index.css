@@ -3,10 +3,9 @@
 @import 'react-tooltip/dist/react-tooltip.css';
 
 @layer theme, custom-base, custom-components, custom-utilities;
-@layer theme, custom-base, custom-components, custom-utilities;
+
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(custom-base);
-@import "tailwindcss/utilities.css" layer(custom-utilities);
 
 @theme {
   --color-chw-primary: var(--sendbird-light-primary-300);
@@ -14,6 +13,8 @@
 }
 
 @layer custom-utilities {
+  @import "tailwindcss/utilities.css";
+
   @keyframes skBouncedelay {
     0%, 80%, 100% {
       transform: scale(1);
