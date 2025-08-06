@@ -43,7 +43,7 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
     >
       <div
         data-tooltip-id={channelUrl}
-        className="bg-gray-200 drop-shadow-xl relative cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
+        className="bg-gray-200 shadow-2xl relative cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
         onClick={handleToggle}
         onMouseEnter={() => setShowCloseButton(true)}
         onMouseLeave={() => setShowCloseButton(false)}
@@ -57,7 +57,7 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
         ) : null}
         {showCloseButton ? (
           <div
-            className="absolute drop-shadow-xl/25 bg-white top-0 right-0 cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
+            className="absolute shadow-2xl bg-white top-0 right-0 cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
             onClick={() => handleCloseChat(channelUrl)}
           >
             <X className="h-3 w-3" color="black" />
@@ -67,7 +67,7 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
       <Tooltip
         id={channelUrl}
         place="left"
-        className="bg-white/90 drop-shadow-xl/25 rounded-2xl"
+        className="bg-white/90 shadow-2xl rounded-2xl"
         variant="light"
       >
         <div className="flex flex-col gap-2 bg-white">

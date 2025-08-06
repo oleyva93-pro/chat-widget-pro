@@ -68,7 +68,7 @@ function ChanelSection({
       />
 
       {showSettings && (
-        <div className="absolute top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl drop-shadow-xl/25">
+        <div className="absolute top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl shadow-2xl">
           <ChatSettingsSection
             channelUrl={channelUrl}
             onClose={() => setShowSettings(false)}

@@ -42,7 +42,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = memo(() => {
             <Tooltip
               id="close-chats"
               place="left"
-              className="bg-white/90 drop-shadow-xl/25 rounded-2xl"
+              className="bg-white/90 shadow-2xl rounded-2xl"
               variant="light"
               content="Close all chats"
             />

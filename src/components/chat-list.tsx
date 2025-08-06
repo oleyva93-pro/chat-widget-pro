@@ -26,7 +26,7 @@ export const ChatList: React.FC<ChannelListProps> = memo(
     return (
       <GroupChannelList
         disableAutoSelect
-        className={cn("drop-shadow-xl/25", className)}
+        className={cn("shadow-2xl", className)}
         onChannelCreated={() => {}}
         renderHeader={() => (
           <section className="">
