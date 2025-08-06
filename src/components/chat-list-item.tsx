@@ -33,7 +33,9 @@ export const ChatListItem: React.FC<ChatListItemProps> = ({
       )}
     >
       <div className="relative flex gap-2 justify-between w-full">
-        <h4 className="text-sm font-medium w-[60%] truncate">{name}</h4>
+        <h4 className="text-sm font-medium w-[60%] truncate text-black">
+          {name}
+        </h4>
         <span className="text-xs text-gray-500">WO# {data.wo}</span>
         {channel?.unreadMessageCount ? (
           <Badge
@@ -67,7 +69,7 @@ function SenderInfo({ channel }: { channel: GroupChannel }) {
           fontSize={12}
         />
         <div className="flex flex-col">
-          <h4 className="text-sm font-medium">
+          <h4 className="text-sm font-medium text-black">
             {sender?.nickname || "SA"}&nbsp;&nbsp;
             <span className="text-xs text-gray-500">
               {messageDistance(channel?.lastMessage?.createdAt || 0)}
