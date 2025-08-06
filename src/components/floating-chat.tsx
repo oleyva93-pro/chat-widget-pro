@@ -67,7 +67,7 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
       <Tooltip
         id={channelUrl}
         place="left"
-        className="bg-white/90 shadow-ch rounded-2xl"
+        className="bg-white/90 shadow-chw rounded-2xl"
         variant="light"
       >
         <div className="flex flex-col gap-2 bg-white">
