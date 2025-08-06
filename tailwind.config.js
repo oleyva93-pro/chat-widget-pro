@@ -15,6 +15,9 @@ export default {
         "chw-primary": "var(--sendbird-light-primary-300)",
         "chw-overlay": "#00000080",
       },
+      boxShadow: {
+        chw: "0px 4px 12px 0px #00000045",
+      },
     },
   },
   plugins: [],
