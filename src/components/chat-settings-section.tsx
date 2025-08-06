@@ -27,53 +27,60 @@ export const ChatSettingsSection = ({
     currentUser !== operators && currentUser !== technicians;
 
   return (
-    <ChannelSettings
-      channelUrl={channelUrl}
-      className="rounded-xl"
-      renderChannelProfile={() => <ChatLeftHeader className="p-4" />}
-      renderLeaveChannel={showLeaveButton ? undefined : () => <></>}
-      renderUserListItem={(props) => (
-        <UserListItem {...props} renderListItemMenu={() => <></>} />
-      )}
-      renderUserProfile={(props) => <UserProfile {...props} disableMessaging />}
-      renderModerationPanel={(props) => (
-        <ChannelSettingMenuList
-          {...props}
-          menuItems={{
-            ...props.menuItems,
-            operator: {
-              ...props.menuItems.operator,
-              bannedUsers: {
-                ...props.menuItems.operator.bannedUsers,
-                hideMenu: true,
+    <div className="absolute animate-fade-in top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl shadow-chw">
+      <ChannelSettings
+        channelUrl={channelUrl}
+        className="rounded-xl"
+        renderChannelProfile={() => <ChatLeftHeader className="p-4" />}
+        renderLeaveChannel={showLeaveButton ? undefined : () => <></>}
+        renderUserListItem={(props) => (
+          <UserListItem {...props} renderListItemMenu={() => <></>} />
+        )}
+        renderUserProfile={(props) => (
+          <UserProfile {...props} disableMessaging />
+        )}
+        renderModerationPanel={(props) => (
+          <ChannelSettingMenuList
+            {...props}
+            menuItems={{
+              ...props.menuItems,
+              operator: {
+                ...props.menuItems.operator,
+                bannedUsers: {
+                  ...props.menuItems.operator.bannedUsers,
+                  hideMenu: true,
+                },
+                mutedUsers: {
+                  ...props.menuItems.operator.mutedUsers,
+                  hideMenu: true,
+                },
+                freezeChannel: {
+                  ...props.menuItems.operator.freezeChannel,
+                  hideMenu: true,
+                },
               },
-              mutedUsers: {
-                ...props.menuItems.operator.mutedUsers,
-                hideMenu: true,
-              },
-              freezeChannel: {
-                ...props.menuItems.operator.freezeChannel,
-                hideMenu: true,
-              },
-            },
-          }}
-        />
-      )}
-      renderHeader={() => (
-        <Header
-          renderMiddle={() => <Header.Title title="Chat Information" />}
-          className="rounded-t-xl"
-          renderRight={() => (
-            <Header.IconButton
-              type="CLOSE"
-              onClick={onClose}
-              renderIcon={() => (
-                <X className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
-              )}
-            />
-          )}
-        />
-      )}
-    />
+            }}
+          />
+        )}
+        renderHeader={() => (
+          <Header
+            renderMiddle={() => <Header.Title title="Chat Information" />}
+            className="rounded-t-xl"
+            renderRight={() => (
+              <Header.IconButton
+                type="CLOSE"
+                onClick={onClose}
+                renderIcon={() => (
+                  <X
+                    className="w-5.5 h-5.5 text-chw-primary"
+                    strokeWidth={2.8}
+                  />
+                )}
+              />
+            )}
+          />
+        )}
+      />
+    </div>
   );
 };
