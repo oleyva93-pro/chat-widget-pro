@@ -26,10 +26,11 @@ export const ChatList: React.FC<ChannelListProps> = memo(
     return (
       <GroupChannelList
         disableAutoSelect
-        className={cn("shadow-2xl", className)}
+        className={cn("shadow-chw", className)}
         onChannelCreated={() => {}}
         renderHeader={() => (
           <section className="">
+            <div className="h-1.5 bg-chw-primary" />
             <header className="border-b border-gray-200 p-4 flex justify-between items-center">
               <section>
                 <h3 className="text-xl text-black">Chats</h3>

@@ -51,7 +51,7 @@ function ChanelSection({
   const isPending = channelStatus === ChannelStatus.PENDING;
 
   return (
-    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200 animate-fade-in shadow-2xl">
+    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200 animate-fade-in shadow-chw">
       <GroupChannel
         channelUrl={channelUrl}
         key={channelUrl}
@@ -68,7 +68,7 @@ function ChanelSection({
       />
 
       {showSettings && (
-        <div className="absolute top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl shadow-2xl">
+        <div className="absolute top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl shadow-chw">
           <ChatSettingsSection
             channelUrl={channelUrl}
             onClose={() => setShowSettings(false)}
