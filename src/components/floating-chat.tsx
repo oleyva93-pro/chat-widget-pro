@@ -23,10 +23,10 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const nickname =
     channel?.lastMessage?.isUserMessage() &&
     channel?.lastMessage?.sender?.userId === currentUser
-      ? "You"
+      ? "You: "
       : channel?.lastMessage?.isUserMessage()
-      ? channel?.lastMessage?.sender?.nickname
-      : "Unknown";
+      ? channel?.lastMessage?.sender?.nickname + ": "
+      : "No Message";
 
   const sender = channel?.lastMessage?.isUserMessage()
     ? channel?.lastMessage?.sender
@@ -88,7 +88,7 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
         <div className="flex flex-col gap-2 bg-white">
           <span className="font-bold">{name}</span>
           <span className="text-sm truncate w-40">
-            {nickname}: {channel?.lastMessage?.message}
+            {nickname} {channel?.lastMessage?.message}
           </span>
         </div>
       </Tooltip>
