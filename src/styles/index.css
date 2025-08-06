@@ -2,17 +2,18 @@
 @import "@sendbird/uikit-react/dist/index.css";
 @import 'react-tooltip/dist/react-tooltip.css';
 
-@layer theme, custom-base, custom-components, custom-utilities;
+@layer theme, chw-base, chw-components, chw-utilities;
 
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(custom-base);
+@import "tailwindcss/preflight.css" layer(chw-base);
+@import "tailwindcss/components.css" layer(chw-components);
 
 @theme {
   --color-chw-primary: var(--sendbird-light-primary-300);
   --color-chw-overlay: #00000080;
 }
 
-@layer custom-utilities {
+@layer chw-utilities {
   @import "tailwindcss/utilities.css";
 
   @keyframes skBouncedelay {
