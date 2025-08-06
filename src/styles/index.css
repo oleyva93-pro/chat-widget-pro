@@ -10,6 +10,7 @@
 
 @theme {
   --color-chw-primary: var(--sendbird-light-primary-300);
+  --color-chw-overlay: #00000080;
 }
 
 @layer custom-utilities {

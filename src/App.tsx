@@ -12,10 +12,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-800">
+    <div className="min-h-screen bg-zinc-100">
       <ChatWidgetProvider config={config}>
         <div className="flex flex-row h-screen">
-          <ChatList />
+          <div className="fixed right-0 top-0 h-screen">
+            <ChatList />
+          </div>
           <ChatWidget />
         </div>
       </ChatWidgetProvider>

@@ -7,6 +7,7 @@ import { useDebounce } from "use-debounce";
 import type { ChannelListProps, ChannelType } from "../types";
 import { SearchInput } from "./ui/search-input";
 import { useChatWidget } from "../hooks/use-chat-widget";
+import { cn } from "../lib/utils";
 
 export const ChatList: React.FC<ChannelListProps> = memo(
   ({ onChannelSelect, onClose, className }) => {
@@ -25,7 +26,7 @@ export const ChatList: React.FC<ChannelListProps> = memo(
     return (
       <GroupChannelList
         disableAutoSelect
-        className={className}
+        className={cn("drop-shadow-xl/25", className)}
         onChannelCreated={() => {}}
         renderHeader={() => (
           <section className="">
