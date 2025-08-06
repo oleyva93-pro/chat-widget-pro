@@ -10,7 +10,6 @@
 @theme {
   --color-chw-primary: var(--sendbird-light-primary-300);
   --color-chw-overlay: #00000080;
-  --shadow-chw: 0px 4px 12px 0px #00000045;
 }
 
 @layer chw-utilities {
@@ -67,6 +66,10 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.shadow-chw {
+  box-shadow: 0px 4px 12px 0px #00000045;
 }
 
 /* Ensure SendBird components are properly styled */
