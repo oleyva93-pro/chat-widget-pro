@@ -34,7 +34,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = memo(() => {
           <>
             <div
               data-tooltip-id="close-chats"
-              className="bg-gray-200 h-8 w-8 relative cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-300 "
+              className="bg-gray-200 shadow-chw h-8 w-8 relative cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-300 "
               onClick={handleCloseAllChats}
             >
               <X className="h-6 w-6" color="black" />
