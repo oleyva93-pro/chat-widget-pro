@@ -7,7 +7,9 @@ import { useDebounce } from "use-debounce";
 import type { ChannelListProps, ChannelType } from "../types";
 import { SearchInput } from "./ui/search-input";
 import { useChatWidget } from "../hooks/use-chat-widget";
-import { cn } from "../lib/utils";
+import { cn, extractChannelName } from "../lib/utils";
+import { ChatListHeader } from "./chat-list-header";
+import { ChatListItem } from "./chat-list-item";
 
 export const ChatList: React.FC<ChannelListProps> = memo(
   ({ onChannelSelect, onClose, className }) => {
@@ -28,28 +30,16 @@ export const ChatList: React.FC<ChannelListProps> = memo(
         disableAutoSelect
         className={cn("shadow-chw", className)}
         onChannelCreated={() => {}}
+        renderChannelPreview={({ channel }) => {
+          return <ChatListItem channel={channel} />;
+        }}
         renderHeader={() => (
-          <section className="">
-            <div className="h-1.5 bg-chw-primary" />
-            <header className="border-b border-gray-200 p-4 flex justify-between items-center">
-              <section>
-                <h3 className="text-xl text-black">Chats</h3>
-              </section>
-              <section className="hover:bg-gray-100 rounded-full p-1">
-                <X
-                  className="w-5 h-5 cursor-pointer "
-                  color="black"
-                  onClick={onClose}
-                />
-              </section>
-            </header>
-            <section className="p-4">
-              <SearchInput
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </section>
-          </section>
+          <ChatListHeader
+            onSearch={(e) => setSearch(e.target.value)}
+            onClose={onClose}
+            className={className}
+            searchValue={search}
+          />
         )}
         renderPlaceHolderLoading={() => (
           <div className="px-4 text-gray-400">Loading chats...</div>

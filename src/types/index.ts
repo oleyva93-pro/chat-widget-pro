@@ -1,4 +1,5 @@
 import type { GroupChannel } from "@sendbird/chat/groupChannel";
+import type React from "react";
 
 // Base configuration for SendBird
 export interface SendBirdConfig {
@@ -38,6 +39,18 @@ export interface ChannelListProps {
   onChannelSelect?: (channel: ChannelType) => void;
   className?: string;
   onClose?: () => void;
+}
+
+export interface ChatListItemProps {
+  channel: GroupChannel;
+  className?: string;
+}
+
+export interface ChatListHeaderProps {
+  onSearch?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClose?: () => void;
+  className?: string;
+  searchValue?: string;
 }
 
 export interface ChatWindowProps {
@@ -90,3 +103,11 @@ export const DEFAULT_CHAT_SIZE = {
   minHeight: 300,
   maxHeight: 800,
 } as const;
+
+export interface ProfileImageProps {
+  profileUrl: string;
+  nickname: string;
+  height?: number;
+  width?: number;
+  fontSize?: number;
+}

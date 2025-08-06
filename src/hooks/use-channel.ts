@@ -1,11 +1,13 @@
-import { useGroupChannel } from "@sendbird/uikit-react/GroupChannel/context";
-import { useQuery } from "@tanstack/react-query";
 import {
   sendbirdSelectors,
   useSendbirdStateContext,
 } from "@sendbird/uikit-react";
+import { useGroupChannel } from "@sendbird/uikit-react/GroupChannel/context";
+import { useQuery } from "@tanstack/react-query";
 
-import { extractChannelName } from "../lib/utils";
+import { getFormattedChannel } from "../lib/utils";
+import { useLayoutEffect, useRef } from "react";
+import type { MetaData } from "@sendbird/chat";
 
 export function useChannelMetadata() {
   const {
@@ -26,14 +28,7 @@ export function useChannelData() {
     state: { currentChannel },
   } = useGroupChannel();
 
-  return {
-    channel: currentChannel,
-    data:
-      typeof currentChannel?.data === "string"
-        ? JSON.parse(currentChannel?.data)
-        : currentChannel?.data,
-    name: extractChannelName(currentChannel?.name),
-  };
+  return getFormattedChannel(currentChannel || null);
 }
 
 export function useGetChannel(channelUrl: string) {
@@ -46,14 +41,20 @@ export function useGetChannel(channelUrl: string) {
     queryFn: () => getChannelFn(channelUrl),
   });
 
-  console.log(currentChannel);
+  return getFormattedChannel(currentChannel || null);
+}
 
-  return {
-    channel: currentChannel,
-    data:
-      typeof currentChannel?.data === "string"
-        ? JSON.parse(currentChannel?.data)
-        : currentChannel?.data,
-    name: extractChannelName(currentChannel?.name),
-  };
+export function useGetChannelMetadata(
+  metadataFunction: () => Promise<MetaData>
+) {
+  const refFunction = useRef(metadataFunction);
+
+  useLayoutEffect(() => {
+    refFunction.current = metadataFunction;
+  }, [metadataFunction]);
+
+  return useQuery({
+    queryKey: ["get-channel-metadata"],
+    queryFn: () => refFunction.current(),
+  });
 }

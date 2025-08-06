@@ -8,6 +8,7 @@ import { Tooltip } from "react-tooltip";
 import { useChannelData } from "../hooks/use-channel";
 import { useChatWidget } from "../hooks/use-chat-widget";
 import { cn } from "../lib/utils";
+import ProfileImage from "./ui/profile-image";
 
 function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { channel, name } = useChannelData();
@@ -27,6 +28,10 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
       ? channel?.lastMessage?.sender?.nickname
       : "Unknown";
 
+  const sender = channel?.lastMessage?.isUserMessage()
+    ? channel?.lastMessage?.sender
+    : undefined;
+
   function handleToggle() {
     setToggle((prev) => !prev);
     setTimeout(() => {
@@ -43,12 +48,22 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
     >
       <div
         data-tooltip-id={channelUrl}
-        className="bg-gray-200 shadow-chw relative cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
+        className="bg-gray-200 shadow-chw relative cursor-pointer rounded-full justify-center items-center flex p-0.5 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
         onClick={handleToggle}
         onMouseEnter={() => setShowCloseButton(true)}
         onMouseLeave={() => setShowCloseButton(false)}
       >
-        <ChannelAvatar channel={channel!} userId="" theme="light" />
+        {sender ? (
+          <ProfileImage
+            profileUrl={sender?.plainProfileUrl || sender?.profileUrl || ""}
+            nickname={sender?.nickname || ""}
+            height={52}
+            width={52}
+            fontSize={15}
+          />
+        ) : (
+          <ChannelAvatar channel={channel!} userId="" theme="light" />
+        )}
         {channel?.unreadMessageCount ? (
           <Badge
             count={channel?.unreadMessageCount ?? 0}
