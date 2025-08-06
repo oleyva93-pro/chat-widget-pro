@@ -13,10 +13,7 @@ import { ChannelStatus, type ChatListItemProps } from "../types";
 import ProfileImage from "./ui/profile-image";
 import Badge from "@sendbird/uikit-react/ui/Badge";
 import { PendingSpinner } from "./ui/pending-spinner";
-import {
-  useChannelMetadata,
-  useGetChannelMetadata,
-} from "../hooks/use-channel";
+import { useGetChannelMetadata } from "../hooks/use-channel";
 
 export const ChatListItem: React.FC<ChatListItemProps> = ({
   channel,

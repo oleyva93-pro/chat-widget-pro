@@ -1,13 +1,11 @@
 import { PublicChannelFilter } from "@sendbird/chat/groupChannel";
 import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
-import { X } from "lucide-react";
 import React, { memo, useState } from "react";
 import { useDebounce } from "use-debounce";
 
-import type { ChannelListProps, ChannelType } from "../types";
-import { SearchInput } from "./ui/search-input";
 import { useChatWidget } from "../hooks/use-chat-widget";
-import { cn, extractChannelName } from "../lib/utils";
+import { cn } from "../lib/utils";
+import type { ChannelListProps, ChannelType } from "../types";
 import { ChatListHeader } from "./chat-list-header";
 import { ChatListItem } from "./chat-list-item";
 
