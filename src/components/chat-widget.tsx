@@ -18,7 +18,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = memo(() => {
   } = useChatWidget();
 
   return (
-    <div className="flex flex-row h-screen">
+    <div className="relative">
       {maximizedChannels.map((entry, index) => (
         <Chat
           key={entry.key}
