@@ -12,7 +12,7 @@ export function SearchInput({ className, ...props }: SearchInputProps) {
       <Input
         placeholder="Search by RO#, YMM or VIN"
         className={cn(
-          "bg-transparent border-none focus:outline-none! focus:ring-0!",
+          "bg-transparent color-black border-none focus:outline-none! focus:ring-0! placeholder:text-[14px]",
           className
         )}
         {...props}
