@@ -130,3 +130,7 @@
 .sendbird-channel-settings {
   width: 337px !important;
 }
+
+.sendbird-dropdown__reaction-bar {
+  z-index: 10000 !important;
+}
