@@ -134,3 +134,7 @@
 .sendbird-dropdown__reaction-bar {
   z-index: 10000 !important;
 }
+
+.sendbird-modal {
+  z-index: 99999 !important;
+}
