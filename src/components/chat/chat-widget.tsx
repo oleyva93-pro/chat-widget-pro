@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import { useChatWidget } from "../../hooks/use-chat-widget";
 import type { ChatWidgetProps } from "../../types";
 import { Chat } from "./chat";
-import { MinimizedChats } from "./minimized-chats";
+import { MinimizedChats } from "./floating-chat/minimized-chats";
 
 export const ChatWidget: React.FC<ChatWidgetProps> = memo(() => {
   const { maximizedChannels, handleCloseChat, handleMinimizeChat } =

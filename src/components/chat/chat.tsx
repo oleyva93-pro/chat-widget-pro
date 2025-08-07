@@ -1,14 +1,16 @@
 import GroupChannel from "@sendbird/uikit-react/GroupChannel";
 import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
-import React, { memo, useState } from "react";
+import React, { memo, useRef } from "react";
 
 import { useChannelData } from "../../hooks/use-channel";
 import { getChannelStatus } from "../../lib/utils";
+import type { WithRefDialogHandle } from "../../lib/with-ref";
 import { ChannelStatus, type ChatWindowProps } from "../../types";
-import ChatHeader from "./chat-header";
+import { DragResize } from "../ui/drag-resize";
+import { InnerDrawerRef } from "../ui/inner-drawer-ref";
+import ChatHeader from "./header/chat-header";
 import { ChatSettingsSection } from "./chat-settings-section";
 import { GroupMessageList } from "./group-message-list";
-import { DragResize } from "../ui/drag-resize";
 
 export const Chat: React.FC<ChatWindowProps> = memo(
   ({ channelUrl, index, onCloseChat, onMinimizeChat }) => {
@@ -39,13 +41,13 @@ function ChanelSection({
   onCloseChat?: () => void;
   onMinimizeChat?: () => void;
 }) {
-  const [showSettings, setShowSettings] = useState(false);
+  const drawerRef = useRef<WithRefDialogHandle>(null);
   const channelData = useChannelData();
 
   const channelStatus = getChannelStatus(channelData.channel ?? null);
 
   function handleShowSettings() {
-    setShowSettings((prev) => !prev);
+    drawerRef.current?.toggle();
   }
 
   const isPending = channelStatus === ChannelStatus.PENDING;
@@ -67,12 +69,12 @@ function ChanelSection({
         )}
       />
 
-      {showSettings && (
+      <InnerDrawerRef ref={drawerRef} onClose={handleShowSettings}>
         <ChatSettingsSection
           channelUrl={channelUrl}
-          onClose={() => setShowSettings(false)}
+          onClose={handleShowSettings}
         />
-      )}
+      </InnerDrawerRef>
     </div>
   );
 }
