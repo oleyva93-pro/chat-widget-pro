@@ -8,7 +8,6 @@ export const ChatListHeader: React.FC<ChatListHeaderProps> = memo(
   ({ onSearch, onClose, className, searchValue }) => {
     return (
       <section className={className}>
-        <div className="h-1.5 bg-chw-primary" />
         <header className="border-b border-gray-200 p-4 flex justify-between items-center">
           <section>
             <h3 className="text-xl text-black">Chats</h3>
