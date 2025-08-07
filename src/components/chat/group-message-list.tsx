@@ -1,7 +1,7 @@
 import MessageList from "@sendbird/uikit-react/GroupChannel/components/MessageList";
 
-import { useChannelMetadata } from "../hooks/use-channel";
-import { PendingSpinner } from "./ui/pending-spinner";
+import { useChannelMetadata } from "../../hooks/use-channel";
+import { PendingSpinner } from "../ui/pending-spinner";
 
 export function GroupMessageList({
   isPending,

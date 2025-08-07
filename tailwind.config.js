@@ -8,6 +8,7 @@ export default {
     "./src/hooks/**/*.{js,ts,jsx,tsx}",
     "./src/context/**/*.{js,ts,jsx,tsx}",
     "./src/styles/**/*.{js,ts,jsx,tsx}",
+    "./dev/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

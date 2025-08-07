@@ -1,6 +1,4 @@
-import { ChatList, ChatWidget, ChatWidgetProvider } from "./index";
-
-import "./index.css";
+import { ChatList, ChatWidget, ChatWidgetProvider } from "../src/index";
 
 function App() {
   const config = {

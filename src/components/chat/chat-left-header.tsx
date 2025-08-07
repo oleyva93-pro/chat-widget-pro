@@ -1,6 +1,6 @@
-import { useChannelData } from "../hooks/use-channel";
-import { cn, getChannelStatus } from "../lib/utils";
-import { ChannelStatus } from "../types";
+import { useChannelData } from "../../hooks/use-channel";
+import { cn, getChannelStatus } from "../../lib/utils";
+import { ChannelStatus } from "../../types";
 
 export const ChatLeftHeader = ({ className }: { className?: string }) => {
   const { channel, name, data } = useChannelData();
@@ -17,8 +17,12 @@ export const ChatLeftHeader = ({ className }: { className?: string }) => {
         })}
       />
       <div className="flex flex-col">
-        <span className="text-xs text-gray-500">WO# {data?.wo}</span>
-        <span className="text-sm font-medium text-black">{name}</span>
+        <span className="text-xs text-gray-500 cancel-drag cursor-text">
+          WO# {data?.wo}
+        </span>
+        <span className="text-sm font-medium text-black cancel-drag cursor-text">
+          {name}
+        </span>
       </div>
     </div>
   );

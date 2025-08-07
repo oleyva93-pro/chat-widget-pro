@@ -1,8 +1,8 @@
 import { X } from "lucide-react";
 import React, { memo } from "react";
 
-import type { ChatListHeaderProps } from "../types";
-import { SearchInput } from "./ui/search-input";
+import type { ChatListHeaderProps } from "../../types";
+import { SearchInput } from "../ui/search-input";
 
 export const ChatListHeader: React.FC<ChatListHeaderProps> = memo(
   ({ onSearch, onClose, className, searchValue }) => {

@@ -48,6 +48,8 @@ export function DragResize({
       maxHeight={DEFAULT_CHAT_SIZE.maxHeight}
       onResize={handleResize}
       bounds="window"
+      dragHandleClassName="allow-drag"
+      cancel=".cancel-drag"
     >
       <div
         className="relative rounded-lg"

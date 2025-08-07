@@ -15,13 +15,14 @@ function ChatHeader({
   onXClick?: () => void;
 }) {
   return (
-    <section className="flex items-center justify-between p-2 border-b border-gray-200 w-full">
+    <section className="flex items-center justify-between p-2 border-b border-gray-200 w-full allow-drag cursor-grab">
       <ChatLeftHeader />
-      <div className="flex justify-end relative">
+      <div className="flex justify-end relative cancel-drag">
         <TooltipWrapper hoverTooltip={<Tooltip>Info</Tooltip>}>
           <div
-            className="rounded-full p-1 hover:bg-gray-100"
+            className="rounded-full p-1 hover:bg-gray-100 cursor-pointer"
             onClick={onInfoClick}
+            onTouchStart={onInfoClick}
           >
             <Info className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
           </div>
@@ -32,16 +33,18 @@ function ChatHeader({
           }
         >
           <div
-            className="rounded-full p-1 hover:bg-gray-100"
+            className="rounded-full p-1 hover:bg-gray-100 cursor-pointer"
             onClick={onMinusClick}
+            onTouchStart={onMinusClick}
           >
             <Minus className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
           </div>
         </TooltipWrapper>
         <TooltipWrapper hoverTooltip={<Tooltip>Close chat</Tooltip>}>
           <div
-            className="rounded-full p-1 hover:bg-gray-100"
+            className="rounded-full p-1 hover:bg-gray-100 cursor-pointer"
             onClick={onXClick}
+            onTouchStart={onXClick}
           >
             <X className="w-5.5 h-5.5 text-chw-primary" strokeWidth={2.8} />
           </div>

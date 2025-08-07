@@ -3,9 +3,9 @@ import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
 import React, { memo, useState } from "react";
 import { useDebounce } from "use-debounce";
 
-import { useChatWidget } from "../hooks/use-chat-widget";
-import { cn } from "../lib/utils";
-import type { ChannelListProps, ChannelType } from "../types";
+import { useChatWidget } from "../../hooks/use-chat-widget";
+import { cn } from "../../lib/utils";
+import type { ChannelListProps, ChannelType } from "../../types";
 import { ChatListHeader } from "./chat-list-header";
 import { ChatListItem } from "./chat-list-item";
 

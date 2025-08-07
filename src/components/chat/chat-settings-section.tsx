@@ -5,7 +5,7 @@ import UserListItem from "@sendbird/uikit-react/ui/UserListItem";
 import UserProfile from "@sendbird/uikit-react/ui/UserProfile";
 import { X } from "lucide-react";
 
-import { useChannelData, useChannelMetadata } from "../hooks/use-channel";
+import { useChannelData, useChannelMetadata } from "../../hooks/use-channel";
 import { ChatLeftHeader } from "./chat-left-header";
 
 export const ChatSettingsSection = ({
@@ -27,7 +27,7 @@ export const ChatSettingsSection = ({
     currentUser !== operators && currentUser !== technicians;
 
   return (
-    <div className="absolute animate-fade-in top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl shadow-chw">
+    <div className="absolute animate-fade-in top-0 right-0 w-full h-full bg-chw-overlay flex justify-end rounded-xl shadow-chw allow-drag cursor-grab">
       <ChannelSettings
         channelUrl={channelUrl}
         className="rounded-xl"
@@ -74,6 +74,7 @@ export const ChatSettingsSection = ({
                   <X
                     className="w-5.5 h-5.5 text-chw-primary"
                     strokeWidth={2.8}
+                    onTouchStart={onClose}
                   />
                 )}
               />

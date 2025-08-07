@@ -5,10 +5,10 @@ import { X } from "lucide-react";
 import { memo, useState } from "react";
 import { Tooltip } from "react-tooltip";
 
-import { useChannelData } from "../hooks/use-channel";
-import { useChatWidget } from "../hooks/use-chat-widget";
-import { cn } from "../lib/utils";
-import ProfileImage from "./ui/profile-image";
+import { useChannelData } from "../../hooks/use-channel";
+import { useChatWidget } from "../../hooks/use-chat-widget";
+import { cn, getMessageNickname, getMessageSender } from "../../lib/utils";
+import ProfileImage from "../ui/profile-image";
 
 function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { channel, name } = useChannelData();
@@ -20,17 +20,9 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
 
   const currentUser = state.config.userId;
 
-  const nickname =
-    channel?.lastMessage?.isUserMessage() &&
-    channel?.lastMessage?.sender?.userId === currentUser
-      ? "You: "
-      : channel?.lastMessage?.isUserMessage()
-      ? channel?.lastMessage?.sender?.nickname + ": "
-      : "No Message";
+  const nickname = getMessageNickname(channel, currentUser);
 
-  const sender = channel?.lastMessage?.isUserMessage()
-    ? channel?.lastMessage?.sender
-    : undefined;
+  const sender = getMessageSender(channel);
 
   function handleToggle() {
     setToggle((prev) => !prev);
@@ -64,12 +56,14 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
         ) : (
           <ChannelAvatar channel={channel!} userId="" theme="light" />
         )}
+
         {channel?.unreadMessageCount ? (
           <Badge
             count={channel?.unreadMessageCount ?? 0}
             className="absolute top-0 left-0"
           />
         ) : null}
+
         {showCloseButton ? (
           <div
             className="absolute shadow-chw bg-white top-0 right-0 cursor-pointer rounded-full justify-center items-center flex p-1 transition delay-50 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 "
@@ -79,6 +73,7 @@ function FloatingChat({ channelUrl }: { channelUrl: string }) {
           </div>
         ) : null}
       </div>
+
       <Tooltip
         id={channelUrl}
         place="left"

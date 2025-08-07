@@ -2,13 +2,13 @@ import GroupChannel from "@sendbird/uikit-react/GroupChannel";
 import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
 import React, { memo, useState } from "react";
 
-import { useChannelData } from "../hooks/use-channel";
-import { getChannelStatus } from "../lib/utils";
-import { ChannelStatus, type ChatWindowProps } from "../types";
+import { useChannelData } from "../../hooks/use-channel";
+import { getChannelStatus } from "../../lib/utils";
+import { ChannelStatus, type ChatWindowProps } from "../../types";
 import ChatHeader from "./chat-header";
 import { ChatSettingsSection } from "./chat-settings-section";
 import { GroupMessageList } from "./group-message-list";
-import { DragResize } from "./ui/drag-resize";
+import { DragResize } from "../ui/drag-resize";
 
 export const Chat: React.FC<ChatWindowProps> = memo(
   ({ channelUrl, index, onCloseChat, onMinimizeChat }) => {
@@ -51,7 +51,7 @@ function ChanelSection({
   const isPending = channelStatus === ChannelStatus.PENDING;
 
   return (
-    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200 animate-fade-in shadow-chw">
+    <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200 animate-fade-in shadow-chw drag-handle">
       <GroupChannel
         channelUrl={channelUrl}
         key={channelUrl}

@@ -3,10 +3,10 @@ import "./styles/index.css";
 import "react-tooltip/dist/react-tooltip.css";
 
 // Main widget component
-export { ChatWidget } from "./components/chat-widget";
+export { ChatWidget } from "./components/chat/chat-widget";
 
 // Individual components for modular use
-export { ChatList } from "./components/chat-list";
+export { ChatList } from "./components/list/chat-list";
 
 // Provider and hooks
 export { ChatWidgetProvider } from "./providers/chat-widget-provider";
