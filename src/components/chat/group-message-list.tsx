@@ -2,6 +2,8 @@ import MessageList from "@sendbird/uikit-react/GroupChannel/components/MessageLi
 
 import { useChannelMetadata } from "../../hooks/use-channel";
 import { PendingSpinner } from "../ui/pending-spinner";
+import Message from "@sendbird/uikit-react/GroupChannel/components/Message";
+import MessageContent from "@sendbird/uikit-react/ui/MessageContent";
 
 export function GroupMessageList({
   isPending,
@@ -29,7 +31,15 @@ export function GroupMessageList({
 
   return (
     <>
-      <MessageList {...props} />
+      <MessageList
+        {...props}
+        renderMessage={(props) => (
+          <Message
+            {...props}
+            renderMessageContent={(props) => <MessageContent {...props} />}
+          />
+        )}
+      />
       {!hasTechnician ? (
         <div className="absolute top-14 left-0 w-full h-6 bg-zinc-300 text-zinc-600 text-sm flex justify-center items-center">
           Waiting for the assigned technician to join.

@@ -6,6 +6,10 @@ function App() {
     userId: "oleyva930424@gmail.com",
     // userId: "alberto.moguel+superadmin@astech.com",
     // userId: "technician@lighthousetech.io",
+
+    // another app
+    // appId: "362E637D-9F70-414C-A5C3-EA689A880FCC",
+    // userId: "oleyva930424",
     isOpen: true,
   };
 

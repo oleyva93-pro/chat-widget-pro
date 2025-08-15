@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@sendbird/chat": "^4.19.6",
-    "@sendbird/uikit-react": "^3.17.0",
+    "@sendbird/uikit-react": "^3.17.2",
     "@tanstack/react-query": "^5.84.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

@@ -75,6 +75,7 @@ export interface ChatWidgetContextType {
   handleCloseChat: (url: string) => void;
   handleMinimizeChat: (url: string) => void;
   handleCloseAllChats: () => void;
+  handleOpenChat: (url: string) => void;
 }
 
 // Provider props

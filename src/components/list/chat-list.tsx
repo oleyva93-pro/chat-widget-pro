@@ -46,7 +46,7 @@ export const ChatList: React.FC<ChannelListProps> = memo(
           channelNameContainsFilter: value,
           includeEmpty: true,
           limit: 100,
-          publicChannelFilter: PublicChannelFilter.PUBLIC,
+          publicChannelFilter: PublicChannelFilter.PRIVATE,
         }}
         onChannelSelect={handleChannelSelect}
       />

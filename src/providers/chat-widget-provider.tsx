@@ -30,7 +30,7 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
     return channelsArray.filter((channel) => channel.minimized);
   }, [channelsArray]);
 
-  const handleSelection = useCallback((c: ChannelType) => {
+  const handleSelection = useCallback((c: ChannelType | { url: string }) => {
     if (!c) return;
 
     const { url } = c;
@@ -78,6 +78,13 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
     setChannels(new Map());
   }, []);
 
+  const handleOpenChat = useCallback(
+    (url: string) => {
+      handleSelection({ url } as { url: string });
+    },
+    [handleSelection]
+  );
+
   return (
     <SBProvider config={config}>
       <RQProvider>
@@ -90,6 +97,7 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
             handleCloseChat,
             handleMinimizeChat,
             handleCloseAllChats,
+            handleOpenChat,
           }}
         >
           {children}
