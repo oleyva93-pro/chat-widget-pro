@@ -1,7 +1,7 @@
 {
   "name": "chat-widget-sendbird",
   "private": false,
-  "version": "1.6.7",
+  "version": "1.6.8",
   "type": "module",
   "description": "A professional chat widget built with SendBird UI Kit and React",
   "keywords": [
