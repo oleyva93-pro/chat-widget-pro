@@ -27,7 +27,7 @@ export const ChatListItem: React.FC<ChatListItemProps> = ({
         <h4 className="text-sm font-medium w-[60%] truncate text-black">
           {name}
         </h4>
-        <span className="text-xs text-gray-500">WO# {data.wo}</span>
+        <span className="text-xs text-gray-500">WO# {data?.wo}</span>
         {channel?.unreadMessageCount ? (
           <Badge
             count={channel?.unreadMessageCount}

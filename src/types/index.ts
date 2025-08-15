@@ -112,3 +112,10 @@ export interface ProfileImageProps {
   width?: number;
   fontSize?: number;
 }
+
+export type ChannelData = {
+  wo?: string;
+  vin?: string;
+  ro?: string;
+  creatorId?: string;
+};
