@@ -7,6 +7,7 @@ import React, {
   useReducer,
   useState,
 } from "react";
+import ConnectionHandler from "@sendbird/uikit-react/handlers/ConnectionHandler";
 
 import { ChatWidgetContext } from "../context/chat-widget-context";
 import { useChatWidget } from "../hooks/use-chat-widget";
@@ -14,10 +15,25 @@ import { playAlarmSound, triggerNotification } from "../lib/notifications";
 import type {
   ChannelEntry,
   ChannelType,
+  ChatWidgetConfig,
   ChatWidgetProviderProps,
 } from "../types";
 import { RQProvider } from "./rq-provider";
 import { SBProvider } from "./sb-provider";
+import { useImperativeGetChannel } from "../hooks/use-channel";
+
+export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
+  children,
+  config,
+}) => {
+  return (
+    <SBProvider config={config}>
+      <RQProvider>
+        <MainActions config={config}>{children}</MainActions>
+      </RQProvider>
+    </SBProvider>
+  );
+};
 
 const notificationReducer = (
   state: { withSound: boolean; withNotification: boolean },
@@ -33,14 +49,31 @@ const notificationReducer = (
   return state;
 };
 
-export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
+function MainActions({
   children,
   config,
-}) => {
+}: {
+  children: React.ReactNode;
+  config: ChatWidgetConfig;
+}) {
   const [state, dispatch] = useReducer(notificationReducer, {
     withSound: config.withSound ?? true,
     withNotification: config.withNotification ?? true,
   });
+
+  const logger = useCallback(
+    (message: string, type: "error" | "warn" | "info" | "debug") => {
+      if (config?.logger) {
+        config.logger(message, type);
+        return;
+      }
+
+      console.log(message, type);
+    },
+    [config]
+  );
+
+  const getChannel = useImperativeGetChannel();
 
   const [channels, setChannels] = useState<Map<string, ChannelEntry>>(
     new Map()
@@ -108,10 +141,19 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
   }, []);
 
   const handleOpenChat = useCallback(
-    (url: string) => {
-      handleSelection({ url } as { url: string });
+    async (url: string) => {
+      try {
+        const channel = await getChannel(url);
+        if (!channel) {
+          logger("Channel not found", "error");
+          return;
+        }
+        handleSelection({ url } as { url: string });
+      } catch {
+        logger("Error opening chat or channel not found", "error");
+      }
     },
-    [handleSelection]
+    [handleSelection, getChannel, logger]
   );
 
   const handleToggleSound = useCallback(() => {
@@ -121,63 +163,81 @@ export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
   const handleToggleNotification = useCallback(() => {
     dispatch("toggleNotification");
   }, []);
-
   return (
-    <SBProvider config={config}>
-      <RQProvider>
-        <ChatWidgetContext.Provider
-          value={{
-            channels: channelsArray,
-            maximizedChannels,
-            minimizedChannels,
-            handleSelection,
-            handleCloseChat,
-            handleMinimizeChat,
-            handleCloseAllChats,
-            handleOpenChat,
-            state,
-            handleToggleSound,
-            handleToggleNotification,
-          }}
-        >
-          <Handlers />
-          {children}
-        </ChatWidgetContext.Provider>
-      </RQProvider>
-    </SBProvider>
+    <ChatWidgetContext.Provider
+      value={{
+        channels: channelsArray,
+        maximizedChannels,
+        minimizedChannels,
+        handleSelection,
+        handleCloseChat,
+        handleMinimizeChat,
+        handleCloseAllChats,
+        handleOpenChat,
+        state,
+        handleToggleSound,
+        handleToggleNotification,
+        logger,
+      }}
+    >
+      <Handlers />
+      {children}
+    </ChatWidgetContext.Provider>
   );
-};
+}
 
 function Handlers() {
   const {
     state: { stores },
   } = useSendbird();
   const sdk = stores?.sdkStore.sdk;
-  const { state } = useChatWidget();
+  const { state, logger } = useChatWidget();
 
   useEffect(() => {
-    if (!sdk) return;
+    if (!sdk.addConnectionHandler) return;
 
-    const groupChannelHandler = new GroupChannelHandler({
-      onMessageReceived: (channel, message) => {
-        if (state.withNotification) {
-          triggerNotification(message, channel as GroupChannel);
-        }
-        if (state.withSound) {
-          playAlarmSound();
-        }
-      },
-    });
+    try {
+      const groupChannelHandler = new GroupChannelHandler({
+        onMessageReceived: (channel, message) => {
+          if (state.withNotification) {
+            triggerNotification(message, channel as GroupChannel);
+          }
+          if (state.withSound) {
+            playAlarmSound();
+          }
+        },
+      });
 
-    sdk?.groupChannel?.addGroupChannelHandler(
-      "group-channel-handler",
-      groupChannelHandler
-    );
+      const connectionHandler = new ConnectionHandler({
+        onConnected: () => {
+          logger("Connected", "info");
+        },
+      });
+
+      if (typeof sdk?.addConnectionHandler === "function") {
+        sdk.addConnectionHandler("UNIQUE_HANDLER_ID", connectionHandler);
+      }
+
+      sdk?.groupChannel?.addGroupChannelHandler(
+        "group-channel-handler",
+        groupChannelHandler
+      );
+    } catch {
+      logger(
+        "Something went wrong with the Sendbird connection handler",
+        "error"
+      );
+    }
 
     return () => {
-      sdk?.groupChannel?.removeGroupChannelHandler("group-channel-handler");
+      try {
+        sdk?.removeConnectionHandler?.("connection-handler");
+        sdk?.groupChannel?.removeGroupChannelHandler?.("group-channel-handler");
+      } catch {
+        logger("Failed to remove the connectionHandler", "error");
+      }
     };
-  }, [sdk, state.withSound, state.withNotification]);
+  }, [sdk, state.withSound, state.withNotification, logger]);
 
   return null;
 }

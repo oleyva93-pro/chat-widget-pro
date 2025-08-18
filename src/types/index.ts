@@ -14,6 +14,7 @@ export interface ChatWidgetProps {
 export interface ChatWidgetConfig extends SendBirdConfig {
   withSound?: boolean;
   withNotification?: boolean;
+  logger?: (message: string, type: "error" | "warn" | "info" | "debug") => void;
 }
 
 // Individual component props
@@ -80,6 +81,7 @@ export interface ChatWidgetContextType {
   };
   handleToggleSound: () => void;
   handleToggleNotification: () => void;
+  logger: (message: string, type: "error" | "warn" | "info" | "debug") => void;
 }
 
 // Provider props

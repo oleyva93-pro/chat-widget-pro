@@ -30,7 +30,11 @@ export const MinimizedChats: React.FC = memo(() => {
         </>
       ) : null}
       {minimizedChannels.map((entry) => (
-        <GroupChannelProvider channelUrl={entry.url} disableMarkAsRead>
+        <GroupChannelProvider
+          key={entry.key}
+          channelUrl={entry.url}
+          disableMarkAsRead
+        >
           <FloatingChat key={entry.key} channelUrl={entry.url} />
         </GroupChannelProvider>
       ))}

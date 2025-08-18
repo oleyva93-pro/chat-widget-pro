@@ -6,7 +6,7 @@ import { useGroupChannel } from "@sendbird/uikit-react/GroupChannel/context";
 import { useQuery } from "@tanstack/react-query";
 
 import { getFormattedChannel } from "../lib/utils";
-import { useLayoutEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 import type { MetaData } from "@sendbird/chat";
 
 export function useChannelMetadata() {
@@ -42,6 +42,18 @@ export function useGetChannel(channelUrl: string) {
   });
 
   return getFormattedChannel(currentChannel || null);
+}
+
+export function useImperativeGetChannel() {
+  const state = useSendbirdStateContext();
+  const getChannelFn = sendbirdSelectors.getGetGroupChannel(state);
+
+  return useCallback(
+    (channelUrl: string) => {
+      return getChannelFn(channelUrl);
+    },
+    [getChannelFn]
+  );
 }
 
 export function useGetChannelMetadata(
