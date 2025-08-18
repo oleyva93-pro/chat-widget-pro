@@ -3,7 +3,7 @@ import ChannelSettingMenuList from "@sendbird/uikit-react/ChannelSettings/compon
 import Header from "@sendbird/uikit-react/ui/Header";
 import UserListItem from "@sendbird/uikit-react/ui/UserListItem";
 import UserProfile from "@sendbird/uikit-react/ui/UserProfile";
-import { X } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { useChannelData, useChannelMetadata } from "../../hooks/use-channel";
 import { ChatLeftHeader } from "./header/chat-left-header";
@@ -64,21 +64,22 @@ export const ChatSettingsSection = ({
         )}
         renderHeader={() => (
           <Header
-            renderMiddle={() => <Header.Title title="Chat Information" />}
-            className="rounded-t-xl"
-            renderRight={() => (
-              <Header.IconButton
-                type="CLOSE"
-                onClick={onClose}
-                renderIcon={() => (
-                  <X
+            renderMiddle={() => (
+              <div className="flex items-center justify-between gap-2">
+                <div
+                  className="rounded-full p-1 hover:bg-gray-100 cursor-pointer"
+                  onTouchStart={onClose}
+                  onClick={onClose}
+                >
+                  <ArrowLeft
                     className="w-5.5 h-5.5 text-chw-primary"
                     strokeWidth={2.8}
-                    onTouchStart={onClose}
                   />
-                )}
-              />
+                </div>
+                <Header.Title title="Chat Information" />
+              </div>
             )}
+            className="rounded-t-xl"
           />
         )}
       />

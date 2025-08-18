@@ -37,7 +37,7 @@ export function DragResize({
       default={{
         x:
           window.innerWidth -
-          (DEFAULT_CHAT_SIZE.width + DEFAULT_CHAT_SIZE.gap) * (index + 1.9),
+          (DEFAULT_CHAT_SIZE.width + DEFAULT_CHAT_SIZE.gap) * (index + 0.9),
         y: window.innerHeight - DEFAULT_CHAT_SIZE.height,
         width: DEFAULT_CHAT_SIZE.width,
         height: DEFAULT_CHAT_SIZE.height,

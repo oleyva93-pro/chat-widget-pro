@@ -12,10 +12,8 @@ export interface ChatWidgetProps {
   key?: string;
 }
 export interface ChatWidgetConfig extends SendBirdConfig {
-  onChannelChanged?: (channel: ChannelType) => void;
-  onMessageReceived?: (message: unknown) => void;
-  onUserConnected?: (user: unknown) => void;
-  onUserDisconnected?: (user: unknown) => void;
+  withSound?: boolean;
+  withNotification?: boolean;
 }
 
 // Individual component props
@@ -76,6 +74,12 @@ export interface ChatWidgetContextType {
   handleMinimizeChat: (url: string) => void;
   handleCloseAllChats: () => void;
   handleOpenChat: (url: string) => void;
+  state: {
+    withSound: boolean;
+    withNotification: boolean;
+  };
+  handleToggleSound: () => void;
+  handleToggleNotification: () => void;
 }
 
 // Provider props

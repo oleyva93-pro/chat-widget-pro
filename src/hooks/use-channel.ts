@@ -37,7 +37,7 @@ export function useGetChannel(channelUrl: string) {
 
   const { data: currentChannel } = useQuery({
     enabled: !!channelUrl,
-    queryKey: ["channel-metadata", channelUrl],
+    queryKey: ["get-channel", channelUrl],
     queryFn: () => getChannelFn(channelUrl),
   });
 
