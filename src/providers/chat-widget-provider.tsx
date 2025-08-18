@@ -175,7 +175,7 @@ function Handlers() {
     );
 
     return () => {
-      sdk?.groupChannel?.removeGroupChannelHandler(groupChannelHandler);
+      sdk?.groupChannel?.removeGroupChannelHandler("group-channel-handler");
     };
   }, [sdk, state.withSound, state.withNotification]);
 
