@@ -1,7 +1,7 @@
 import { GroupChannelHandler } from "@sendbird/chat/groupChannel";
 import { useSendbird } from "@sendbird/uikit-react";
 import ConnectionHandler from "@sendbird/uikit-react/handlers/ConnectionHandler";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useId, useLayoutEffect, useRef } from "react";
 
 import type { BaseChannel } from "@sendbird/chat";
 import type { BaseMessage } from "@sendbird/chat/message";
@@ -18,6 +18,8 @@ export function useEventHandlers(handlers: EventHandlers): void {
     state: { stores },
   } = useSendbird();
   const sdk = stores?.sdkStore.sdk;
+
+  const id = useId();
 
   const handlersRef = useRef<EventHandlers>(handlers);
 
@@ -45,11 +47,11 @@ export function useEventHandlers(handlers: EventHandlers): void {
       });
 
       if (typeof sdk?.addConnectionHandler === "function") {
-        sdk.addConnectionHandler("UNIQUE_HANDLER_ID", connectionHandler);
+        sdk.addConnectionHandler(`connection-handler-${id}`, connectionHandler);
       }
 
       sdk?.groupChannel?.addGroupChannelHandler(
-        "group-channel-handler",
+        `group-channel-handler-${id}`,
         groupChannelHandler
       );
     } catch {
@@ -68,5 +70,5 @@ export function useEventHandlers(handlers: EventHandlers): void {
         );
       }
     };
-  }, [sdk]);
+  }, [sdk, id]);
 }
