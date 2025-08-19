@@ -82,6 +82,7 @@ export interface ChatWidgetContextType {
   handleToggleSound: () => void;
   handleToggleNotification: () => void;
   logger: (message: string, type: "error" | "warn" | "info" | "debug") => void;
+  handleJoinChannel: (url: string) => void;
 }
 
 // Provider props

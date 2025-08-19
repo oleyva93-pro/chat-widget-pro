@@ -5,34 +5,48 @@ import UserListItem from "@sendbird/uikit-react/ui/UserListItem";
 import UserProfile from "@sendbird/uikit-react/ui/UserProfile";
 import { ArrowLeft } from "lucide-react";
 
-import { useChannelData, useChannelMetadata } from "../../hooks/use-channel";
+import { useChannelMetadata, useGetChannel } from "../../hooks/use-channel";
 import { ChatLeftHeader } from "./header/chat-left-header";
+import { Role } from "@sendbird/chat";
+import { useChatWidget } from "../../hooks/use-chat-widget";
 
 export const ChatSettingsSection = ({
   channelUrl,
   onClose,
+  existsChannel,
 }: {
   channelUrl: string;
   onClose: () => void;
+  existsChannel: boolean;
 }) => {
   const { state } = useSendbird();
-  const { channel } = useChannelData();
+  const { handleCloseChat } = useChatWidget();
+
+  const { channel } = useGetChannel(channelUrl);
   const { data: channelMetadata } = useChannelMetadata();
 
   const currentUser = state.config.userId;
-  const operators = channel?.creator?.userId;
-  const technicians = channelMetadata?.associatedTechnician;
+  const imOperator = channel?.members?.some(
+    (member) => member.role === Role.OPERATOR && member.userId === currentUser
+  );
+  const imTechnicians = channelMetadata?.associatedTechnician === currentUser;
 
-  const showLeaveButton =
-    currentUser !== operators && currentUser !== technicians;
+  const showLeaveButton = !imOperator && !imTechnicians;
 
   return (
     <div className="allow-drag cursor-grab">
       <ChannelSettings
         channelUrl={channelUrl}
         className="rounded-xl"
-        renderChannelProfile={() => <ChatLeftHeader className="p-4" />}
-        renderLeaveChannel={showLeaveButton ? undefined : () => <></>}
+        onLeaveChannel={() => {
+          handleCloseChat(channelUrl);
+        }}
+        renderChannelProfile={() => (
+          <ChatLeftHeader channelUrl={channelUrl} className="p-4" />
+        )}
+        renderLeaveChannel={
+          showLeaveButton && existsChannel ? undefined : () => <></>
+        }
         renderUserListItem={(props) => (
           <UserListItem {...props} renderListItemMenu={() => <></>} />
         )}
@@ -44,6 +58,13 @@ export const ChatSettingsSection = ({
             {...props}
             menuItems={{
               ...props.menuItems,
+              nonOperator: {
+                ...props.menuItems.nonOperator,
+                allUsers: {
+                  ...props.menuItems.nonOperator.allUsers,
+                  hideMenu: !existsChannel,
+                },
+              },
               operator: {
                 ...props.menuItems.operator,
                 bannedUsers: {

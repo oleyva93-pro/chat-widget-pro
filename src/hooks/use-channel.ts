@@ -25,10 +25,15 @@ export function useChannelMetadata() {
 
 export function useChannelData() {
   const {
-    state: { currentChannel },
+    state: { currentChannel, initialized },
   } = useGroupChannel();
 
-  return getFormattedChannel(currentChannel || null);
+  const channel = getFormattedChannel(currentChannel || null);
+
+  return {
+    ...channel,
+    initialized,
+  };
 }
 
 export function useGetChannel(channelUrl: string) {

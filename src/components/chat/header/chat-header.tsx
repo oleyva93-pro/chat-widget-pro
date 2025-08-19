@@ -9,14 +9,16 @@ function ChatHeader({
   onInfoClick,
   onMinusClick,
   onXClick,
+  channelUrl,
 }: {
   onInfoClick?: () => void;
   onMinusClick?: () => void;
   onXClick?: () => void;
+  channelUrl: string;
 }) {
   return (
     <section className="flex items-center justify-between p-2 border-b border-gray-200 w-full allow-drag cursor-grab">
-      <ChatLeftHeader />
+      <ChatLeftHeader channelUrl={channelUrl} />
       <div className="flex justify-end relative cancel-drag">
         <TooltipWrapper hoverTooltip={<Tooltip>Info</Tooltip>}>
           <div

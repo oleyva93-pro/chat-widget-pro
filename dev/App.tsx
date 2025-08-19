@@ -46,6 +46,7 @@ function ChatControls() {
     handleToggleNotification,
     handleMinimizeChat,
     handleCloseChat,
+    handleJoinChannel,
     channels,
     state,
   } = useChatWidget();
@@ -83,6 +84,33 @@ function ChatControls() {
           />
           <button className="px-4 py-2 bg-blue-500 text-white rounded">
             Open Chat
+          </button>
+        </form>
+        <form
+          className="flex flex-col gap-2 bg-gray-100 px-4 py-5 rounded-md"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = new FormData(e.target as HTMLFormElement);
+            const chatUrl = form.get("chat-url") as string;
+            if (
+              chatUrl &&
+              !channels.some((channel) => channel.url === chatUrl)
+            ) {
+              handleJoinChannel(chatUrl);
+            }
+          }}
+        >
+          <label htmlFor="chat-url">Join Chat by channel URL</label>
+          <input
+            type="text"
+            id="chat-url"
+            name="chat-url"
+            required
+            className="w-full p-2 border border-gray-300 rounded"
+            placeholder="Enter chat url"
+          />
+          <button className="px-4 py-2 bg-blue-800 text-white rounded">
+            Join Chat
           </button>
         </form>
         <div className="flex flex-col gap-2 bg-gray-100 px-4 py-5 rounded-md">

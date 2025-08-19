@@ -1,9 +1,15 @@
-import { useChannelData } from "../../../hooks/use-channel";
+import { useGetChannel } from "../../../hooks/use-channel";
 import { cn, getChannelStatus } from "../../../lib/utils";
 import { ChannelStatus } from "../../../types";
 
-export const ChatLeftHeader = ({ className }: { className?: string }) => {
-  const { channel, name, data } = useChannelData();
+export const ChatLeftHeader = ({
+  className,
+  channelUrl,
+}: {
+  className?: string;
+  channelUrl: string;
+}) => {
+  const { channel, name, data } = useGetChannel(channelUrl);
 
   const channelStatus = getChannelStatus(channel ?? null);
 

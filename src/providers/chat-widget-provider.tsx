@@ -149,6 +149,21 @@ function MainActions({
     [handleSelection, getChannel, logger]
   );
 
+  const handleJoinChannel = useCallback(
+    async (url: string) => {
+      try {
+        const channel = await getChannel(url);
+        if (channel) {
+          await channel.join();
+          handleOpenChat(url);
+        }
+      } catch {
+        logger("Error joining channel", "error");
+      }
+    },
+    [getChannel, handleOpenChat, logger]
+  );
+
   const handleToggleSound = useCallback(() => {
     dispatch("toggleSound");
   }, []);
@@ -171,6 +186,7 @@ function MainActions({
         handleToggleSound,
         handleToggleNotification,
         logger,
+        handleJoinChannel,
       }}
     >
       <Handlers />

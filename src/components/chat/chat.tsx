@@ -1,4 +1,5 @@
 import GroupChannel from "@sendbird/uikit-react/GroupChannel";
+import MessageInputWrapper from "@sendbird/uikit-react/GroupChannel/components/MessageInputWrapper";
 import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
 import React, { memo, useRef } from "react";
 
@@ -8,9 +9,9 @@ import type { WithRefDialogHandle } from "../../lib/with-ref";
 import { ChannelStatus, type ChatWindowProps } from "../../types";
 import { DragResize } from "../ui/drag-resize";
 import { InnerDrawerRef } from "../ui/inner-drawer-ref";
-import ChatHeader from "./header/chat-header";
 import { ChatSettingsSection } from "./chat-settings-section";
 import { GroupMessageList } from "./group-message-list";
+import ChatHeader from "./header/chat-header";
 
 export const Chat: React.FC<ChatWindowProps> = memo(
   ({ channelUrl, index, onCloseChat, onMinimizeChat }) => {
@@ -42,9 +43,11 @@ function ChanelSection({
   onMinimizeChat?: () => void;
 }) {
   const drawerRef = useRef<WithRefDialogHandle>(null);
-  const channelData = useChannelData();
+  const { channel } = useChannelData();
 
-  const channelStatus = getChannelStatus(channelData.channel ?? null);
+  const existsChannel = !!channel;
+
+  const channelStatus = getChannelStatus(channel ?? null);
 
   function handleShowSettings() {
     drawerRef.current?.toggle();
@@ -58,13 +61,22 @@ function ChanelSection({
         channelUrl={channelUrl}
         key={channelUrl}
         renderMessageList={(props) => (
-          <GroupMessageList isPending={isPending} {...props} />
+          <GroupMessageList
+            existsChannel={existsChannel}
+            isPending={isPending}
+            channelUrl={channelUrl}
+            {...props}
+          />
+        )}
+        renderMessageInput={() => (
+          <MessageInputWrapper disabled={!existsChannel || isPending} />
         )}
         renderChannelHeader={() => (
           <ChatHeader
             onInfoClick={handleShowSettings}
             onMinusClick={onMinimizeChat}
             onXClick={onCloseChat}
+            channelUrl={channelUrl}
           />
         )}
       />
@@ -72,6 +84,7 @@ function ChanelSection({
       <InnerDrawerRef ref={drawerRef} onClose={handleShowSettings}>
         <ChatSettingsSection
           channelUrl={channelUrl}
+          existsChannel={existsChannel}
           onClose={handleShowSettings}
         />
       </InnerDrawerRef>
