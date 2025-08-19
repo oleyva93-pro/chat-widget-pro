@@ -4,6 +4,7 @@ import {
   ChatWidget,
   ChatWidgetProvider,
   useChatWidget,
+  useUnreadMessages,
 } from "../src/index";
 
 function App() {
@@ -49,9 +50,14 @@ function ChatControls() {
     state,
   } = useChatWidget();
 
+  const unreadCount = useUnreadMessages();
+
   return (
     <div className="p-4 bg-white h-screen w-80 border">
       <div className="flex flex-col gap-5">
+        <div className="flex items-center gap-2">
+          <span>Unread messages: {unreadCount}</span>
+        </div>
         <form
           className="flex flex-col gap-2 bg-gray-100 px-4 py-5 rounded-md"
           onSubmit={(e) => {

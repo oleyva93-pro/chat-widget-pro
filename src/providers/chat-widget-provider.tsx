@@ -1,16 +1,10 @@
-import { GroupChannel, GroupChannelHandler } from "@sendbird/chat/groupChannel";
-import { useSendbird } from "@sendbird/uikit-react";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useReducer,
-  useState,
-} from "react";
-import ConnectionHandler from "@sendbird/uikit-react/handlers/ConnectionHandler";
+import { GroupChannel } from "@sendbird/chat/groupChannel";
+import React, { useCallback, useMemo, useReducer, useState } from "react";
 
 import { ChatWidgetContext } from "../context/chat-widget-context";
+import { useImperativeGetChannel } from "../hooks/use-channel";
 import { useChatWidget } from "../hooks/use-chat-widget";
+import { useEventHandlers } from "../hooks/use-event-handlers";
 import { playAlarmSound, triggerNotification } from "../lib/notifications";
 import type {
   ChannelEntry,
@@ -20,7 +14,6 @@ import type {
 } from "../types";
 import { RQProvider } from "./rq-provider";
 import { SBProvider } from "./sb-provider";
-import { useImperativeGetChannel } from "../hooks/use-channel";
 
 export const ChatWidgetProvider: React.FC<ChatWidgetProviderProps> = ({
   children,
@@ -187,57 +180,24 @@ function MainActions({
 }
 
 function Handlers() {
-  const {
-    state: { stores },
-  } = useSendbird();
-  const sdk = stores?.sdkStore.sdk;
   const { state, logger } = useChatWidget();
 
-  useEffect(() => {
-    if (!sdk.addConnectionHandler) return;
-
-    try {
-      const groupChannelHandler = new GroupChannelHandler({
-        onMessageReceived: (channel, message) => {
-          if (state.withNotification) {
-            triggerNotification(message, channel as GroupChannel);
-          }
-          if (state.withSound) {
-            playAlarmSound();
-          }
-        },
-      });
-
-      const connectionHandler = new ConnectionHandler({
-        onConnected: () => {
-          logger("Connected", "info");
-        },
-      });
-
-      if (typeof sdk?.addConnectionHandler === "function") {
-        sdk.addConnectionHandler("UNIQUE_HANDLER_ID", connectionHandler);
+  useEventHandlers({
+    onMessageReceived: (channel, message) => {
+      if (state.withNotification) {
+        triggerNotification(message, channel as GroupChannel);
       }
-
-      sdk?.groupChannel?.addGroupChannelHandler(
-        "group-channel-handler",
-        groupChannelHandler
-      );
-    } catch {
-      logger(
-        "Something went wrong with the Sendbird connection handler",
-        "error"
-      );
-    }
-
-    return () => {
-      try {
-        sdk?.removeConnectionHandler?.("connection-handler");
-        sdk?.groupChannel?.removeGroupChannelHandler?.("group-channel-handler");
-      } catch {
-        logger("Failed to remove the connectionHandler", "error");
+      if (state.withSound) {
+        playAlarmSound();
       }
-    };
-  }, [sdk, state.withSound, state.withNotification, logger]);
+    },
+    onConnected: () => {
+      logger("Connected", "info");
+    },
+    onError: (error) => {
+      logger(error.message, "error");
+    },
+  });
 
   return null;
 }
