@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { cn } from "../../lib/utils";
 import withRefDialog from "../../lib/with-ref";
 
@@ -9,7 +10,8 @@ type InnerDrawerRefProps = {
 };
 
 export const InnerDrawerRef = withRefDialog(
-  ({ children, className }: InnerDrawerRefProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  forwardRef(({ children, className }: InnerDrawerRefProps, _ref) => {
     return (
       <div
         className={cn(
@@ -20,5 +22,5 @@ export const InnerDrawerRef = withRefDialog(
         {children}
       </div>
     );
-  }
+  })
 );
