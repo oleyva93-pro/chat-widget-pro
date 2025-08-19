@@ -126,3 +126,8 @@ export type ChannelData = {
   ro?: string;
   creatorId?: string;
 };
+
+export interface FaviconUpdaterProps {
+  faviconAppUrl: string;
+  faviconUnreadAppUrl: string;
+}
