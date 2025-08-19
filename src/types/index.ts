@@ -130,4 +130,5 @@ export type ChannelData = {
 export interface FaviconUpdaterProps {
   faviconAppUrl: string;
   faviconUnreadAppUrl: string;
+  faviconId?: string;
 }

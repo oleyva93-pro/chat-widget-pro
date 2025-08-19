@@ -6,11 +6,12 @@ import type { FaviconUpdaterProps } from "../../types";
 function FaviconUpdater({
   faviconAppUrl,
   faviconUnreadAppUrl,
+  faviconId = "favicon",
 }: FaviconUpdaterProps) {
   const unreadCount = useUnreadMessages();
 
   useEffect(() => {
-    const favicon = document.getElementById("favicon") as HTMLLinkElement;
+    const favicon = document.getElementById(faviconId) as HTMLLinkElement;
     if (!favicon) return;
 
     if (unreadCount > 0) {
@@ -18,7 +19,7 @@ function FaviconUpdater({
     } else {
       favicon.href = faviconAppUrl;
     }
-  }, [unreadCount, faviconAppUrl, faviconUnreadAppUrl]);
+  }, [unreadCount, faviconAppUrl, faviconUnreadAppUrl, faviconId]);
 
   return null;
 }

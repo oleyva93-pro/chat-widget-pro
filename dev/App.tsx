@@ -3,6 +3,7 @@ import {
   ChatList,
   ChatWidget,
   ChatWidgetProvider,
+  FaviconUpdater,
   useChatWidget,
   useUnreadMessages,
 } from "../src/index";
@@ -32,6 +33,10 @@ function App() {
             <ChatWidget />
           </div>
         </div>
+        <FaviconUpdater
+          faviconAppUrl="favicon.ico"
+          faviconUnreadAppUrl="faviconAlert.ico"
+        />
       </ChatWidgetProvider>
     </div>
   );

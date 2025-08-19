@@ -39,7 +39,7 @@ export function GroupMessageList({
   }
 
   if (!channelMetadata) {
-    return null;
+    return <div className="w-full h-full" />;
   }
 
   return (
