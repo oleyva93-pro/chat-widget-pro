@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getFormattedChannel } from "../lib/utils";
 import { useCallback, useLayoutEffect, useRef } from "react";
 import type { MetaData } from "@sendbird/chat";
+import { useNonReactiveCallback } from "./use-non-reactive-callback";
 
 export function useChannelMetadata() {
   const {
@@ -53,11 +54,13 @@ export function useImperativeGetChannel() {
   const state = useSendbirdStateContext();
   const getChannelFn = sendbirdSelectors.getGetGroupChannel(state);
 
+  const getChannel = useNonReactiveCallback(getChannelFn);
+
   return useCallback(
     (channelUrl: string) => {
-      return getChannelFn(channelUrl);
+      return getChannel(channelUrl);
     },
-    [getChannelFn]
+    [getChannel]
   );
 }
 
