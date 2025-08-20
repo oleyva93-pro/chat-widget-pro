@@ -150,11 +150,19 @@ function MainActions({
   );
 
   const handleJoinChannel = useCallback(
-    async (url: string) => {
+    async (url: string, technician: string) => {
       try {
         const channel = await getChannel(url);
         if (channel) {
           await channel.join();
+          if (technician) {
+            await channel.updateMetaData(
+              {
+                associatedTechnician: technician,
+              },
+              true
+            );
+          }
           handleOpenChat(url);
         }
       } catch {

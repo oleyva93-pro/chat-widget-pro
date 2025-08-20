@@ -36,6 +36,7 @@ function App() {
         <FaviconUpdater
           faviconAppUrl="favicon.ico"
           faviconUnreadAppUrl="faviconAlert.ico"
+          faviconId="favicon"
         />
       </ChatWidgetProvider>
     </div>
