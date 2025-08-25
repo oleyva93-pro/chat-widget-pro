@@ -3,12 +3,14 @@ import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useImperativeGetChannel } from "../hooks/use-channel";
 import type { ChannelEntry, ChannelType } from "../types";
 
-export function useHandleChannel(options: {
+type Options = {
   logger: (message: string, type: "error" | "warn" | "info" | "debug") => void;
-}) {
+};
+
+export function useHandleChannel(options: Options) {
   const getChannel = useImperativeGetChannel();
 
-  const optionsRef = useRef(options || {});
+  const optionsRef = useRef<Options>(options || {});
 
   const [channels, setChannels] = useState<Map<string, ChannelEntry>>(
     new Map()
@@ -77,7 +79,7 @@ export function useHandleChannel(options: {
 
   const handleOpenChat = useCallback(
     async (url: string) => {
-      const { logger = () => {} } = optionsRef.current || {};
+      const { logger = () => {} } = optionsRef.current;
       try {
         const channel = await getChannel(url);
         if (!channel) {
@@ -94,7 +96,7 @@ export function useHandleChannel(options: {
 
   const handleJoinChannel = useCallback(
     async (url: string, technician?: string) => {
-      const { logger = () => {} } = optionsRef.current || {};
+      const { logger = () => {} } = optionsRef.current;
       try {
         const channel = await getChannel(url);
         if (channel) {
