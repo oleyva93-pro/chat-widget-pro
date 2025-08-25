@@ -11,12 +11,13 @@ import {
 function App() {
   const config = {
     appId: "3CCEC8CF-D8FD-447B-88E2-91294429F5D2",
-    // userId: "oleyva930424@gmail.com",
-    userId: "alberto.moguel+superadmin@astech.com",
+    userId: "oleyva930424@gmail.com",
+    // userId: "alberto.moguel+superadmin@astech.com",
     // userId: "technician@lighthousetech.io",
 
     // another app
     // appId: "362E637D-9F70-414C-A5C3-EA689A880FCC",
+    // userId: "hbagale+2supervisor@astech.com",
     // userId: "oleyva930424",
     isOpen: true,
   };
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="min-h-screen bg-zinc-100">
       <ChatWidgetProvider config={config}>
-        <ChatControls />
+        <ChatControls userId={config.userId} />
         <div className="flex flex-row h-screen z-50">
           <div className="fixed right-0 top-0 h-screen">
             <ChatList />
@@ -43,7 +44,7 @@ function App() {
   );
 }
 
-function ChatControls() {
+function ChatControls({ userId }: { userId: string }) {
   const {
     handleCloseAllChats,
     maximizedChannels,
@@ -55,6 +56,8 @@ function ChatControls() {
     handleJoinChannel,
     channels,
     state,
+    handleDisconnect,
+    handleConnect,
   } = useChatWidget();
 
   const unreadCount = useUnreadMessages();
@@ -62,6 +65,9 @@ function ChatControls() {
   return (
     <div className="p-4 bg-white h-screen w-80 border">
       <div className="flex flex-col gap-5">
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-500">User ID: {userId}</span>
+        </div>
         <div className="flex items-center gap-2">
           <span>Unread messages: {unreadCount}</span>
         </div>
@@ -186,6 +192,18 @@ function ChatControls() {
           className="px-4 py-2 bg-gray-500 text-white rounded"
         >
           Close All Chats ({maximizedChannels.length})
+        </button>
+        <button
+          onClick={handleDisconnect}
+          className="px-4 py-2 bg-gray-500 text-white rounded"
+        >
+          Disconnect
+        </button>
+        <button
+          onClick={handleConnect}
+          className="px-4 py-2 bg-gray-500 text-white rounded"
+        >
+          Connect
         </button>
       </div>
     </div>

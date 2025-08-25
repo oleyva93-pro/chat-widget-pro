@@ -1,17 +1,10 @@
-import { GroupChannel } from "@sendbird/chat/groupChannel";
-import React, { useCallback, useMemo, useReducer, useState } from "react";
+import React, { useCallback, useMemo, useReducer } from "react";
 
+import { Handlers } from "../components/utils/handlers";
 import { ChatWidgetContext } from "../context/chat-widget-context";
-import { useImperativeGetChannel } from "../hooks/use-channel";
-import { useChatWidget } from "../hooks/use-chat-widget";
-import { useEventHandlers } from "../hooks/use-event-handlers";
-import { playAlarmSound, triggerNotification } from "../lib/notifications";
-import type {
-  ChannelEntry,
-  ChannelType,
-  ChatWidgetConfig,
-  ChatWidgetProviderProps,
-} from "../types";
+import { useConnection } from "../hooks/use-connection";
+import { useHandleChannel } from "../hooks/use-handle-channel";
+import type { ChatWidgetConfig, ChatWidgetProviderProps } from "../types";
 import { RQProvider } from "./rq-provider";
 import { SBProvider } from "./sb-provider";
 
@@ -54,6 +47,8 @@ function MainActions({
     withNotification: config.withNotification ?? true,
   });
 
+  const { handleDisconnect, handleConnect } = useConnection(config);
+
   const logger = useCallback(
     (message: string, type: "error" | "warn" | "info" | "debug") => {
       if (config?.logger) {
@@ -66,110 +61,21 @@ function MainActions({
     [config]
   );
 
-  const getChannel = useImperativeGetChannel();
-
-  const [channels, setChannels] = useState<Map<string, ChannelEntry>>(
-    new Map()
-  );
+  const {
+    channels,
+    maximizedChannels,
+    minimizedChannels,
+    handleSelection,
+    handleCloseChat,
+    handleCloseAllChats,
+    handleOpenChat,
+    handleJoinChannel,
+    handleMinimizeChat,
+  } = useHandleChannel({ logger });
 
   const channelsArray = useMemo(
     () => Array.from(channels.values()),
     [channels]
-  );
-
-  const maximizedChannels = useMemo(() => {
-    return channelsArray.filter((channel) => !channel.minimized);
-  }, [channelsArray]);
-
-  const minimizedChannels = useMemo(() => {
-    return channelsArray.filter((channel) => channel.minimized);
-  }, [channelsArray]);
-
-  const handleSelection = useCallback((c: ChannelType | { url: string }) => {
-    if (!c) return;
-
-    const { url } = c;
-
-    setChannels((prev) => {
-      if (prev.get(url)) {
-        const channel = prev.get(url);
-        if (!channel?.minimized) {
-          return prev;
-        }
-      }
-
-      const channelsOpen = new Map(prev);
-      channelsOpen.set(url, {
-        url,
-        key: `${url}-${Date.now()}`,
-        minimized: false,
-      });
-
-      return channelsOpen;
-    });
-  }, []);
-
-  const handleCloseChat = useCallback((url: string) => {
-    setChannels((prev) => {
-      const newChannels = new Map(prev);
-      newChannels.delete(url);
-      return newChannels;
-    });
-  }, []);
-
-  const handleMinimizeChat = useCallback((url: string) => {
-    setChannels((prev) => {
-      const newChannels = new Map(prev);
-      const channel = newChannels.get(url);
-
-      if (!channel) return prev;
-
-      newChannels.set(url, { ...channel, minimized: !channel.minimized });
-      return newChannels;
-    });
-  }, []);
-
-  const handleCloseAllChats = useCallback(() => {
-    setChannels(new Map());
-  }, []);
-
-  const handleOpenChat = useCallback(
-    async (url: string) => {
-      try {
-        const channel = await getChannel(url);
-        if (!channel) {
-          logger("Channel not found", "error");
-          return;
-        }
-        handleSelection({ url } as { url: string });
-      } catch {
-        logger("Error opening chat or channel not found", "error");
-      }
-    },
-    [handleSelection, getChannel, logger]
-  );
-
-  const handleJoinChannel = useCallback(
-    async (url: string, technician: string) => {
-      try {
-        const channel = await getChannel(url);
-        if (channel) {
-          await channel.join();
-          if (technician) {
-            await channel.updateMetaData(
-              {
-                associatedTechnician: technician,
-              },
-              true
-            );
-          }
-          handleOpenChat(url);
-        }
-      } catch {
-        logger("Error joining channel", "error");
-      }
-    },
-    [getChannel, handleOpenChat, logger]
   );
 
   const handleToggleSound = useCallback(() => {
@@ -179,6 +85,7 @@ function MainActions({
   const handleToggleNotification = useCallback(() => {
     dispatch("toggleNotification");
   }, []);
+
   return (
     <ChatWidgetContext.Provider
       value={{
@@ -195,33 +102,12 @@ function MainActions({
         handleToggleNotification,
         logger,
         handleJoinChannel,
+        handleDisconnect,
+        handleConnect,
       }}
     >
       <Handlers />
       {children}
     </ChatWidgetContext.Provider>
   );
-}
-
-function Handlers() {
-  const { state, logger } = useChatWidget();
-
-  useEventHandlers({
-    onMessageReceived: (channel, message) => {
-      if (state.withNotification) {
-        triggerNotification(message, channel as GroupChannel);
-      }
-      if (state.withSound) {
-        playAlarmSound();
-      }
-    },
-    onConnected: () => {
-      logger("Connected", "info");
-    },
-    onError: (error) => {
-      logger(error.message, "error");
-    },
-  });
-
-  return null;
 }
