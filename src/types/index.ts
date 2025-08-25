@@ -14,6 +14,8 @@ export interface ChatWidgetProps {
 export interface ChatWidgetConfig extends SendBirdConfig {
   withSound?: boolean;
   withNotification?: boolean;
+  nickname?: string;
+  profileUrl?: string;
   logger?: (message: string, type: "error" | "warn" | "info" | "debug") => void;
 }
 

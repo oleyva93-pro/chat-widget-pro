@@ -20,6 +20,8 @@ function App() {
     // userId: "hbagale+2supervisor@astech.com",
     // userId: "oleyva930424",
     isOpen: true,
+    nickname: "Oscar Leyva",
+    profileUrl: "https://picsum.photos/200/300",
   };
 
   return (
