@@ -15,6 +15,8 @@ export function SBProvider({
     <SendbirdProvider
       appId={config.appId}
       userId={config.userId}
+      profileUrl={config.profileUrl}
+      nickname={config.nickname}
       sdkInitParams={{
         appStateToggleEnabled: false,
         modules: [new GroupChannelModule()],
