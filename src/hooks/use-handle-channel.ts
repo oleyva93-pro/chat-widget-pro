@@ -79,7 +79,7 @@ export function useHandleChannel(options: Options) {
 
   const handleOpenChat = useCallback(
     async (url: string) => {
-      const { logger = () => {} } = optionsRef.current;
+      const logger = optionsRef.current?.logger;
       try {
         const channel = await getChannel(url);
         if (!channel) {
@@ -96,7 +96,7 @@ export function useHandleChannel(options: Options) {
 
   const handleJoinChannel = useCallback(
     async (url: string, technician?: string) => {
-      const { logger = () => {} } = optionsRef.current;
+      const logger = optionsRef.current?.logger;
       try {
         const channel = await getChannel(url);
         if (channel) {
