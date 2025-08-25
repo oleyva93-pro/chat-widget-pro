@@ -7,10 +7,16 @@ type Options = {
   logger: (message: string, type: "error" | "warn" | "info" | "debug") => void;
 };
 
-export function useHandleChannel(options: Options) {
+const defaultOptions: Options = {
+  logger: (message: string, type: "error" | "warn" | "info" | "debug") => {
+    console[type](message);
+  },
+};
+
+export function useHandleChannel(options?: Options) {
   const getChannel = useImperativeGetChannel();
 
-  const optionsRef = useRef<Options>(options || {});
+  const optionsRef = useRef<Options>(options || defaultOptions);
 
   const [channels, setChannels] = useState<Map<string, ChannelEntry>>(
     new Map()
@@ -119,7 +125,7 @@ export function useHandleChannel(options: Options) {
   );
 
   useLayoutEffect(() => {
-    optionsRef.current = options;
+    optionsRef.current = options || defaultOptions;
   });
 
   return {
