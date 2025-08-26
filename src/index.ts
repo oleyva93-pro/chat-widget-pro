@@ -14,6 +14,10 @@ export { useChatWidget } from "./hooks/use-chat-widget";
 export { useUnreadMessages } from "./hooks/use-unread-messages";
 export { default as FaviconUpdater } from "./components/ui/favicon-updater";
 export { ChatHistory } from "./components/history/chat-history";
+export {
+  openChatHistory,
+  closeChatHistory,
+} from "./lib/chat-history-singleton";
 
 // Types
 export type {
