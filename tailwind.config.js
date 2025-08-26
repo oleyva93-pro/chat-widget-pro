@@ -14,6 +14,7 @@ export default {
     extend: {
       colors: {
         "chw-primary": "var(--sendbird-light-primary-300)",
+        "chw-secondary": "var(--sendbird-light-background-100)",
         "chw-overlay": "#00000080",
       },
       boxShadow: {

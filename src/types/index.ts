@@ -136,3 +136,49 @@ export interface FaviconUpdaterProps {
   faviconUnreadAppUrl: string;
   faviconId?: string;
 }
+
+export interface ChatHistoryProps {
+  externalHistoryUrl: string;
+  externalToken: string | (() => string);
+}
+
+export type ChatHistoryParams = {
+  woID: string;
+  vin: string;
+  name: string;
+};
+
+export type ChatHistoryHandle = {
+  open: (params?: ChatHistoryParams) => void;
+  close: () => void;
+};
+
+export type ChatHistoryMessage = {
+  message_id: number;
+  type: "MESG" | "ADMM";
+  custom_type: string;
+  channel_url: string;
+  user: {
+    user_id: string;
+    nickname: string;
+    profile_url: string;
+  };
+  mention_type: string;
+  mentioned_users: string[];
+  message: string;
+  created_at: string;
+  updated_at: string;
+  root_message_id: string | null;
+  parent_message_id: string | null;
+  parent_message_text: string;
+  translations: Record<string, string>;
+  data: string;
+  metadata: Record<string, unknown>;
+  full_json: Record<string, unknown>;
+  is_op_msg: boolean;
+  is_removed: boolean;
+  message_events: Record<string, unknown>;
+  message_retention_hour: number;
+  message_survival_seconds: number;
+  channel_type: "group" | "open";
+};
