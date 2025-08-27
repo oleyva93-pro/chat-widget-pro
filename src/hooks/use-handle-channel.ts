@@ -124,6 +124,26 @@ export function useHandleChannel(options?: Options) {
     [getChannel, handleOpenChat]
   );
 
+  const handleFreezeChannel = useCallback(
+    async (url: string) => {
+      const channel = await getChannel(url);
+      if (channel) {
+        await channel.freeze();
+      }
+    },
+    [getChannel]
+  );
+
+  const handleUnfreezeChannel = useCallback(
+    async (url: string) => {
+      const channel = await getChannel(url);
+      if (channel) {
+        await channel.unfreeze();
+      }
+    },
+    [getChannel]
+  );
+
   useLayoutEffect(() => {
     optionsRef.current = options || defaultOptions;
   });
@@ -138,5 +158,7 @@ export function useHandleChannel(options?: Options) {
     handleCloseAllChats,
     handleOpenChat,
     handleJoinChannel,
+    handleFreezeChannel,
+    handleUnfreezeChannel,
   };
 }

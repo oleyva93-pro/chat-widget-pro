@@ -85,6 +85,8 @@ export interface ChatWidgetContextType {
   handleToggleNotification: () => void;
   logger: (message: string, type: "error" | "warn" | "info" | "debug") => void;
   handleJoinChannel: (url: string, technician?: string) => void;
+  handleFreezeChannel: (url: string) => void;
+  handleUnfreezeChannel: (url: string) => void;
   handleDisconnect: () => void;
   handleConnect: () => void;
 }

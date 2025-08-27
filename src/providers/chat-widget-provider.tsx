@@ -71,6 +71,8 @@ function MainActions({
     handleOpenChat,
     handleJoinChannel,
     handleMinimizeChat,
+    handleFreezeChannel,
+    handleUnfreezeChannel,
   } = useHandleChannel({ logger });
 
   const channelsArray = useMemo(
@@ -104,6 +106,8 @@ function MainActions({
         handleJoinChannel,
         handleDisconnect,
         handleConnect,
+        handleFreezeChannel,
+        handleUnfreezeChannel,
       }}
     >
       <Handlers />
