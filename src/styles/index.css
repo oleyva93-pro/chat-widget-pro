@@ -142,3 +142,7 @@
 .sendbird-theme--light .sendbird-icon-color--read [class*=fill] {
   fill: var(--sendbird-light-primary-300) !important;
 }
+
+.sendbird__user-profile .sendbird__user-profile-message {
+  display: none !important;
+}

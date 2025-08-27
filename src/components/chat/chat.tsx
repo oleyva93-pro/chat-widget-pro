@@ -4,6 +4,7 @@ import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context
 import React, { memo, useRef } from "react";
 
 import { useChannelData } from "../../hooks/use-channel";
+import useTabVisibility from "../../hooks/use-tab-visibility";
 import { getChannelStatus } from "../../lib/utils";
 import type { WithRefDialogHandle } from "../../lib/with-ref";
 import { ChannelStatus, type ChatWindowProps } from "../../types";
@@ -49,17 +50,24 @@ function ChanelSection({
 
   const channelStatus = getChannelStatus(channel ?? null);
 
+  const isPending = channelStatus === ChannelStatus.PENDING;
+
+  useTabVisibility((visible) => {
+    if (visible) {
+      channel?.markAsRead();
+    }
+  });
+
   function handleShowSettings() {
     drawerRef.current?.toggle();
   }
-
-  const isPending = channelStatus === ChannelStatus.PENDING;
 
   return (
     <div className="relative w-full h-full rounded-xl bg-white p-1 border border-gray-200 animate-fade-in shadow-chw drag-handle">
       <GroupChannel
         channelUrl={channelUrl}
         key={channelUrl}
+        disableMarkAsRead
         renderMessageList={(props) => (
           <GroupMessageList
             existsChannel={existsChannel}
