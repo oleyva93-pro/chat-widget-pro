@@ -129,9 +129,10 @@ export function useHandleChannel(options?: Options) {
       const channel = await getChannel(url);
       if (channel) {
         await channel.freeze();
+        handleCloseChat(url);
       }
     },
-    [getChannel]
+    [getChannel, handleCloseChat]
   );
 
   const handleUnfreezeChannel = useCallback(
