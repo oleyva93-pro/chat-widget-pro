@@ -39,7 +39,7 @@ function App() {
         <div className="fixed top-0 right-0 w-full z-50">
           <ChatHistory
             externalHistoryUrl="https://connect.dev.astech.com/api/v1/chat/channels/messages/"
-            externalToken={() => "Bearer 7Nxyd92Tw9FXmdGA0VpLMG7lW5Rx2J"}
+            externalToken={() => "Bearer Fk0ZHoZzt9mjn19tykAnCPWAl2n2aC"}
           />
         </div>
         <FaviconUpdater

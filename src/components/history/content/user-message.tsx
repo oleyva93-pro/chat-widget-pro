@@ -19,7 +19,7 @@ export const UserMessage = memo(
     return (
       <div
         className={cn(
-          "inline-flex flex-row items-end justify-center gap-2 max-w-[400px] p-2 rounded-lg",
+          "inline-flex flex-row items-end justify-center gap-2 p-2 rounded-lg",
           isCurrentUser ? "justify-end" : "justify-start"
         )}
       >
@@ -38,20 +38,27 @@ export const UserMessage = memo(
               fontSize={12}
             />
           )}
-          <div
-            className={cn(
-              "bg-gray-200 flex justify-center rounded-2xl p-3",
-              isCurrentUser ? "bg-chw-primary" : "bg-chw-secondary"
+          <div className="flex flex-col gap-1">
+            {isCurrentUser ? null : (
+              <label className="text-xs text-gray-500 font-bold">
+                {message.user.nickname}
+              </label>
             )}
-          >
-            <label
+            <div
               className={cn(
-                "text-sm",
-                isCurrentUser ? "text-white" : "text-black"
+                "bg-gray-200 flex justify-center rounded-2xl p-3",
+                isCurrentUser ? "bg-chw-primary" : "bg-chw-secondary"
               )}
             >
-              {message.message}
-            </label>
+              <label
+                className={cn(
+                  "text-sm",
+                  isCurrentUser ? "text-white" : "text-black"
+                )}
+              >
+                {message.message}
+              </label>
+            </div>
           </div>
           <label className="text-xs text-gray-500 mb-1">
             {formatDate(new Date(message.created_at), "time")}
