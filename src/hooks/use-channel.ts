@@ -1,14 +1,14 @@
+import type { MetaData } from "@sendbird/chat";
 import {
   sendbirdSelectors,
   useSendbirdStateContext,
 } from "@sendbird/uikit-react";
 import { useGroupChannel } from "@sendbird/uikit-react/GroupChannel/context";
 import { useQuery } from "@tanstack/react-query";
-
-import { getFormattedChannel } from '@/lib/utils';
 import { useCallback, useLayoutEffect, useRef } from "react";
-import type { MetaData } from "@sendbird/chat";
-import { useNonReactiveCallback } from '@/hooks/use-non-reactive-callback';
+
+import { useNonReactiveCallback } from "@/hooks/use-non-reactive-callback";
+import { getFormattedChannel } from "@/lib/utils";
 
 export function useChannelMetadata() {
   const {
