@@ -169,6 +169,7 @@ export type ChatHistoryMessage = {
   mentioned_users: string[];
   message: string;
   created_at: string;
+  createdAt: string;
   updated_at: string;
   root_message_id: string | null;
   parent_message_id: string | null;
