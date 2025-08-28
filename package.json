@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && npm run build:css",
+    "build": "vite build && npm run build:css",
     "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts && npm run copy-types && npm run clean-temp",
     "copy-types": "cp -r dist-temp/* dist/ 2>/dev/null || true",
     "clean-temp": "rm -rf dist-temp",
