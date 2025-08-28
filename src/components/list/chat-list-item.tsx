@@ -1,10 +1,10 @@
 import React from "react";
 
 import Badge from "@sendbird/uikit-react/ui/Badge";
-import { cn, getFormattedChannel } from "../../lib/utils";
-import { type ChatListItemProps } from "../../types";
-import { NoSenderInfoItem } from "./no-sender-info-item";
-import { SenderInfoItem } from "./sender-info-item";
+import { cn, getFormattedChannel } from '@/lib/utils';
+import { type ChatListItemProps } from '@/types';
+import { NoSenderInfoItem } from '@/components/list/no-sender-info-item';
+import { SenderInfoItem } from '@/components/list/sender-info-item';
 
 export const ChatListItem: React.FC<ChatListItemProps> = ({
   channel,

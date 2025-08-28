@@ -5,10 +5,10 @@ import {
 import { useGroupChannel } from "@sendbird/uikit-react/GroupChannel/context";
 import { useQuery } from "@tanstack/react-query";
 
-import { getFormattedChannel } from "../lib/utils";
+import { getFormattedChannel } from '@/lib/utils';
 import { useCallback, useLayoutEffect, useRef } from "react";
 import type { MetaData } from "@sendbird/chat";
-import { useNonReactiveCallback } from "./use-non-reactive-callback";
+import { useNonReactiveCallback } from '@/hooks/use-non-reactive-callback';
 
 export function useChannelMetadata() {
   const {

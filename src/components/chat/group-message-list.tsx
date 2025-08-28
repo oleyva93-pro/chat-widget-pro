@@ -7,8 +7,8 @@ import { useCallback } from "react";
 import {
   useChannelMetadata,
   useImperativeGetChannel,
-} from "../../hooks/use-channel";
-import { PendingSpinner } from "../ui/pending-spinner";
+} from '@/hooks/use-channel';
+import { PendingSpinner } from '@/components/ui/pending-spinner';
 
 export function GroupMessageList({
   existsChannel,

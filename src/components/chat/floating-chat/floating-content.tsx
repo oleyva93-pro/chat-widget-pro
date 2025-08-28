@@ -4,9 +4,9 @@ import ChannelAvatar from "@sendbird/uikit-react/ui/ChannelAvatar";
 import { memo } from "react";
 import { Tooltip } from "react-tooltip";
 
-import { useChannelData } from "../../../hooks/use-channel";
-import { getMessageNickname, getMessageSender } from "../../../lib/utils";
-import ProfileImage from "../../ui/profile-image";
+import { useChannelData } from '@/hooks/use-channel';
+import { getMessageNickname, getMessageSender } from '@/lib/utils';
+import ProfileImage from '@/components/ui/profile-image';
 
 export const FloatingContent = memo(
   ({ channelUrl }: { channelUrl: string }) => {

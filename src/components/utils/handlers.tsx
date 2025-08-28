@@ -1,8 +1,8 @@
 import type { GroupChannel } from "@sendbird/chat/groupChannel";
 
-import { useChatWidget } from "../../hooks/use-chat-widget";
-import { useEventHandlers } from "../../hooks/use-event-handlers";
-import { playAlarmSound, triggerNotification } from "../../lib/notifications";
+import { useChatWidget } from '@/hooks/use-chat-widget';
+import { useEventHandlers } from '@/hooks/use-event-handlers';
+import { playAlarmSound, triggerNotification } from '@/lib/notifications';
 
 export function Handlers() {
   const { state, logger } = useChatWidget();

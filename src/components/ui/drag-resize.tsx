@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Rnd } from "react-rnd";
 
-import { DEFAULT_CHAT_SIZE, type ChatSize } from "../../types";
+import { DEFAULT_CHAT_SIZE, type ChatSize } from '@/types';
 
 export function DragResize({
   children,

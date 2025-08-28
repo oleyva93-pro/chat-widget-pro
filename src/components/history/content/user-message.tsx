@@ -1,10 +1,10 @@
 import { useSendbird } from "@sendbird/uikit-react";
 import { memo } from "react";
 
-import type { ChatHistoryMessage } from "../../../types";
-import { formatDate } from "../../../lib/date";
-import { cn } from "../../../lib/utils";
-import ProfileImage from "../../ui/profile-image";
+import type { ChatHistoryMessage } from '@/types';
+import { formatDate } from '@/lib/date';
+import { cn } from '@/lib/utils';
+import ProfileImage from '@/components/ui/profile-image';
 
 export const UserMessage = memo(
   ({ message }: { message: ChatHistoryMessage }) => {

@@ -1,10 +1,10 @@
 import type { GroupChannel } from "@sendbird/chat/groupChannel";
 import { User } from "lucide-react";
 
-import { useGetChannelMetadata } from "../../hooks/use-channel";
-import { getChannelStatus } from "../../lib/utils";
-import { ChannelStatus } from "../../types";
-import { PendingSpinner } from "../ui/pending-spinner";
+import { useGetChannelMetadata } from '@/hooks/use-channel';
+import { getChannelStatus } from '@/lib/utils';
+import { ChannelStatus } from '@/types';
+import { PendingSpinner } from '@/components/ui/pending-spinner';
 
 export function NoSenderInfoItem({ channel }: { channel: GroupChannel }) {
   const channelStatus = getChannelStatus(channel ?? null);

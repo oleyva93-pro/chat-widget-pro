@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 
-import { useImperativeGetChannel } from "../hooks/use-channel";
-import type { ChannelEntry, ChannelType } from "../types";
+import { useImperativeGetChannel } from '@/hooks/use-channel';
+import type { ChannelEntry, ChannelType } from '@/types';
 
 type Options = {
   logger: (message: string, type: "error" | "warn" | "info" | "debug") => void;

@@ -3,16 +3,16 @@ import MessageInputWrapper from "@sendbird/uikit-react/GroupChannel/components/M
 import { GroupChannelProvider } from "@sendbird/uikit-react/GroupChannel/context";
 import React, { memo, useRef } from "react";
 
-import { useChannelData } from "../../hooks/use-channel";
-import useTabVisibility from "../../hooks/use-tab-visibility";
-import { getChannelStatus } from "../../lib/utils";
-import type { WithRefDialogHandle } from "../../lib/with-ref";
-import { ChannelStatus, type ChatWindowProps } from "../../types";
-import { DragResize } from "../ui/drag-resize";
-import { InnerDrawerRef } from "../ui/inner-drawer-ref";
-import { ChatSettingsSection } from "./chat-settings-section";
-import { GroupMessageList } from "./group-message-list";
-import ChatHeader from "./header/chat-header";
+import { useChannelData } from '@/hooks/use-channel';
+import useTabVisibility from '@/hooks/use-tab-visibility';
+import { getChannelStatus } from '@/lib/utils';
+import type { WithRefDialogHandle } from '@/lib/with-ref';
+import { ChannelStatus, type ChatWindowProps } from '@/types';
+import { DragResize } from '@/components/ui/drag-resize';
+import { InnerDrawerRef } from '@/components/ui/inner-drawer-ref';
+import { ChatSettingsSection } from '@/components/chat/chat-settings-section';
+import { GroupMessageList } from '@/components/chat/group-message-list';
+import ChatHeader from '@/components/chat/header/chat-header';
 
 export const Chat: React.FC<ChatWindowProps> = memo(
   ({ channelUrl, index, onCloseChat, onMinimizeChat }) => {

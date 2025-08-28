@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { getRandomColor } from "../../lib/random-colors";
-import { getInitialFromFullName } from "../../lib/utils";
-import type { ProfileImageProps } from "../../types";
+import { getRandomColor } from '@/lib/random-colors';
+import { getInitialFromFullName } from '@/lib/utils';
+import type { ProfileImageProps } from '@/types';
 
 export default function ProfileImage({
   profileUrl,

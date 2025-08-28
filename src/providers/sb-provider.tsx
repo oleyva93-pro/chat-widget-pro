@@ -2,7 +2,7 @@ import { GroupChannelModule } from "@sendbird/chat/groupChannel";
 import SendbirdProvider from "@sendbird/uikit-react/SendbirdProvider";
 import React from "react";
 
-import type { ChatWidgetConfig } from "../types";
+import type { ChatWidgetConfig } from '@/types';
 
 export function SBProvider({
   children,

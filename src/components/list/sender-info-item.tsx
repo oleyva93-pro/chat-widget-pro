@@ -1,8 +1,8 @@
 import type { GroupChannel } from "@sendbird/chat/groupChannel";
 import { User } from "lucide-react";
 
-import { messageDistance, truncateText } from "../../lib/utils";
-import ProfileImage from "../ui/profile-image";
+import { messageDistance, truncateText } from '@/lib/utils';
+import ProfileImage from '@/components/ui/profile-image';
 
 export function SenderInfoItem({ channel }: { channel: GroupChannel }) {
   const sender = channel?.lastMessage?.isUserMessage()

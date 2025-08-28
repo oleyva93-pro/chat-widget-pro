@@ -3,8 +3,8 @@ import useSWRInfinite from "swr/infinite";
 import axios from "axios";
 
 import { useMemo } from "react";
-import { useChatHistoryContext } from "./use-chat-history";
-import type { ChatHistoryMessage, ChatHistoryParams } from "../types";
+import { useChatHistoryContext } from '@/hooks/use-chat-history';
+import type { ChatHistoryMessage, ChatHistoryParams } from '@/types';
 import useSWRMutation from "swr/mutation";
 
 const PAGE_SIZE = 50;

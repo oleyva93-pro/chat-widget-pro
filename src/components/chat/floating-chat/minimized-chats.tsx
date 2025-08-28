@@ -3,8 +3,8 @@ import { X } from "lucide-react";
 import React, { memo } from "react";
 import { Tooltip } from "react-tooltip";
 
-import { useChatWidget } from "../../../hooks/use-chat-widget";
-import FloatingChat from "./floating-chat";
+import { useChatWidget } from '@/hooks/use-chat-widget';
+import FloatingChat from '@/components/chat/floating-chat/floating-chat';
 
 export const MinimizedChats: React.FC = memo(() => {
   const { minimizedChannels, handleCloseAllChats } = useChatWidget();

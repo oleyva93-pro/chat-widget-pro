@@ -3,11 +3,11 @@ import { GroupChannelList } from "@sendbird/uikit-react/GroupChannelList";
 import React, { memo, useState } from "react";
 import { useDebounce } from "use-debounce";
 
-import { useChatWidget } from "../../hooks/use-chat-widget";
-import { cn } from "../../lib/utils";
-import type { ChannelListProps, ChannelType } from "../../types";
-import { ChatListHeader } from "./chat-list-header";
-import { ChatListItem } from "./chat-list-item";
+import { useChatWidget } from '@/hooks/use-chat-widget';
+import { cn } from '@/lib/utils';
+import type { ChannelListProps, ChannelType } from '@/types';
+import { ChatListHeader } from '@/components/list/chat-list-header';
+import { ChatListItem } from '@/components/list/chat-list-item';
 
 export const ChatList: React.FC<ChannelListProps> = memo(
   ({ onChannelSelect, onClose, className }) => {

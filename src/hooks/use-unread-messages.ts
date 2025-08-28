@@ -1,7 +1,7 @@
 import { useSendbird } from "@sendbird/uikit-react";
 import { useState, useEffect, useCallback } from "react";
 
-import { useEventHandlers } from "./use-event-handlers";
+import { useEventHandlers } from '@/hooks/use-event-handlers';
 
 export const useUnreadMessages = () => {
   const {

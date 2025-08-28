@@ -3,7 +3,7 @@ import TooltipWrapper from "@sendbird/uikit-react/ui/TooltipWrapper";
 import { Info, Minus, X } from "lucide-react";
 import { memo } from "react";
 
-import { ChatLeftHeader } from "./chat-left-header";
+import { ChatLeftHeader } from '@/components/chat/header/chat-left-header';
 
 function ChatHeader({
   onInfoClick,

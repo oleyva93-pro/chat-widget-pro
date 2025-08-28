@@ -1,7 +1,7 @@
 import { memo, useEffect } from "react";
 
-import { useUnreadMessages } from "../../hooks/use-unread-messages";
-import type { FaviconUpdaterProps } from "../../types";
+import { useUnreadMessages } from '@/hooks/use-unread-messages';
+import type { FaviconUpdaterProps } from '@/types';
 
 function FaviconUpdater({
   faviconAppUrl,

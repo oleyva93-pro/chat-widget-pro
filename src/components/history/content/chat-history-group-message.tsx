@@ -1,9 +1,9 @@
 import { memo } from "react";
 
-import type { ChatHistoryMessage } from "../../../types";
-import { formatDate } from "../../../lib/date";
-import { AdminMessage } from "./admin-message";
-import { UserMessage } from "./user-message";
+import type { ChatHistoryMessage } from '@/types';
+import { formatDate } from '@/lib/date';
+import { AdminMessage } from '@/components/history/content/admin-message';
+import { UserMessage } from '@/components/history/content/user-message';
 
 export const ChatHistoryGroupMessage = memo(
   ({ group }: { group: [string, ChatHistoryMessage[]] }) => {

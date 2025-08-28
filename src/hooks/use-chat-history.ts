@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ChatHistoryContext } from "../context/chat-history-context";
+import { ChatHistoryContext } from '@/context/chat-history-context';
 
 export function useChatHistoryContext() {
   const context = useContext(ChatHistoryContext);

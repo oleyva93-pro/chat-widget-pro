@@ -1,5 +1,5 @@
 import { memo } from "react";
-import type { ChatHistoryMessage } from "../../../types";
+import type { ChatHistoryMessage } from '@/types';
 
 export const AdminMessage = memo(
   ({ message }: { message: ChatHistoryMessage }) => {

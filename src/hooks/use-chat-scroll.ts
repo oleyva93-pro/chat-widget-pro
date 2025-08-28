@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
-import usePreviousRef from "./use-previous-ref";
+import usePreviousRef from '@/hooks/use-previous-ref';
 
 export const useChatScroll = (active: boolean, callback: () => void) => {
   const callbackRef = useRef(callback);

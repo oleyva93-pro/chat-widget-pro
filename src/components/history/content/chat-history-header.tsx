@@ -3,10 +3,10 @@ import TooltipWrapper from "@sendbird/uikit-react/ui/TooltipWrapper";
 import { Copy, X } from "lucide-react";
 import { memo, useMemo, useState } from "react";
 
-import { useImperativeChatHistory } from "../../../hooks/use-history-message";
-import { formatToFullDate } from "../../../lib/date";
-import type { ChatHistoryParams } from "../../../types";
-import { Loader } from "../../ui/loader";
+import { useImperativeChatHistory } from '@/hooks/use-history-message';
+import { formatToFullDate } from '@/lib/date';
+import type { ChatHistoryParams } from '@/types';
+import { Loader } from '@/components/ui/loader';
 
 type ChatHistoryHeaderProps = {
   wo: string;

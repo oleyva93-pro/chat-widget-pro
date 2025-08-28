@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
-import { cn } from "../../lib/utils";
-import withRefDialog from "../../lib/with-ref";
+import { cn } from '@/lib/utils';
+import withRefDialog from '@/lib/with-ref';
 
 type InnerDrawerRefProps = {
   open?: boolean;

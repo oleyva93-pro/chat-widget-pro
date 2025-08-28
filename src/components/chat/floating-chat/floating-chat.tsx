@@ -1,8 +1,8 @@
 import { X } from "lucide-react";
 import { memo, useState } from "react";
 
-import { useChatWidget } from "../../../hooks/use-chat-widget";
-import { FloatingContent } from "./floating-content";
+import { useChatWidget } from '@/hooks/use-chat-widget';
+import { FloatingContent } from '@/components/chat/floating-chat/floating-content';
 
 function FloatingChat({ channelUrl }: { channelUrl: string }) {
   const { handleMinimizeChat, handleCloseChat } = useChatWidget();

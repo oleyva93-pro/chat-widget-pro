@@ -1,7 +1,7 @@
 import { useSendbird } from "@sendbird/uikit-react";
 import { useCallback, useEffect } from "react";
 
-import type { ChatWidgetConfig } from "../types";
+import type { ChatWidgetConfig } from '@/types';
 import type SendbirdChat from "@sendbird/chat";
 
 export function useConnection(config: ChatWidgetConfig) {

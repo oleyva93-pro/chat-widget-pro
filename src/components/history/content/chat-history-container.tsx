@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 
-import { useChatScroll } from "../../../hooks/use-chat-scroll";
-import { useHistoryMessages } from "../../../hooks/use-history-message";
-import { formatDate } from "../../../lib/date";
-import { wait } from "../../../lib/utils";
-import type { ChatHistoryMessage, ChatHistoryParams } from "../../../types";
-import { PendingSpinner } from "../../ui/pending-spinner";
-import { ChatHistoryGroupMessage } from "./chat-history-group-message";
-import ChatHistoryHeader from "./chat-history-header";
+import { useChatScroll } from '@/hooks/use-chat-scroll';
+import { useHistoryMessages } from '@/hooks/use-history-message';
+import { formatDate } from '@/lib/date';
+import { wait } from '@/lib/utils';
+import type { ChatHistoryMessage, ChatHistoryParams } from '@/types';
+import { PendingSpinner } from '@/components/ui/pending-spinner';
+import { ChatHistoryGroupMessage } from '@/components/history/content/chat-history-group-message';
+import ChatHistoryHeader from '@/components/history/content/chat-history-header';
 
 function groupMessagesByDay(messages: ChatHistoryMessage[]) {
   return messages.reduce<Record<string, ChatHistoryMessage[]>>(
