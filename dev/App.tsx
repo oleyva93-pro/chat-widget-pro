@@ -13,7 +13,8 @@ import { openChatHistory } from "../src/lib/chat-history-singleton";
 function App() {
   const config = {
     appId: "3CCEC8CF-D8FD-447B-88E2-91294429F5D2",
-    userId: "oleyva930424@gmail.com",
+    // userId: "oleyva930424@gmail.com",
+    userId: "hbagale+2qa@astech.com",
     // userId: "alberto.moguel+superadmin@astech.com",
     // userId: "technician@lighthousetech.io",
 

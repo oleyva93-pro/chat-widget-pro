@@ -17,6 +17,19 @@ export function SBProvider({
       userId={config.userId}
       profileUrl={config.profileUrl}
       nickname={config.nickname}
+      eventHandlers={{
+        connection: {
+          onConnected: (user) => {
+            user.updateMetaData(
+              {
+                email: config.userId,
+                name: config.nickname ?? "",
+              },
+              true
+            );
+          },
+        },
+      }}
       sdkInitParams={{
         appStateToggleEnabled: false,
         modules: [new GroupChannelModule()],

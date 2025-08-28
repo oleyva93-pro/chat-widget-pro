@@ -1,3 +1,4 @@
+import { Role } from "@sendbird/chat";
 import { ChannelSettings, useSendbird } from "@sendbird/uikit-react";
 import ChannelSettingMenuList from "@sendbird/uikit-react/ChannelSettings/components/ChannelSettingMenuList";
 import Header from "@sendbird/uikit-react/ui/Header";
@@ -6,9 +7,8 @@ import UserProfile from "@sendbird/uikit-react/ui/UserProfile";
 import { ArrowLeft } from "lucide-react";
 
 import { useChannelMetadata, useGetChannel } from "../../hooks/use-channel";
-import { ChatLeftHeader } from "./header/chat-left-header";
-import { Role } from "@sendbird/chat";
 import { useChatWidget } from "../../hooks/use-chat-widget";
+import { ChatLeftHeader } from "./header/chat-left-header";
 
 export const ChatSettingsSection = ({
   channelUrl,
