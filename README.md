@@ -6,9 +6,11 @@ A professional, modular chat widget built with SendBird UI Kit and React. This p
 
 - ✅ **Real-time chat** with SendBird
 - ✅ **Modular architecture** - use individual components or the complete widget
-- ✅ **Multiple chat windows** simultaneously
-- ✅ **Drag and resize** functionality
-- ✅ **Unread messages tracking**
+- ✅ **Multiple chat windows** simultaneously with drag and resize
+- ✅ **Chat history** with external API integration
+- ✅ **Unread messages tracking** with favicon updates
+- ✅ **Sound and notification controls**
+- ✅ **Channel management** (join, freeze, unfreeze)
 - ✅ **TypeScript** support with full type definitions
 - ✅ **Tailwind CSS** styling included
 - ✅ **React 18+ and 19+** compatible
@@ -40,6 +42,10 @@ function App() {
   const config = {
     appId: "YOUR_SENDBIRD_APP_ID",
     userId: "unique-user-123",
+    nickname: "User Name",
+    profileUrl: "https://example.com/avatar.jpg",
+    withSound: true,
+    withNotification: true,
   };
 
   return (
@@ -50,16 +56,29 @@ function App() {
 }
 ```
 
-### Advanced Usage with Chat List
+### Advanced Usage with All Components
 
 ```tsx
 import React from 'react';
-import { ChatWidget, ChatList, ChatWidgetProvider } from 'chat-widget-sendbird';
+import { 
+  ChatWidget, 
+  ChatList, 
+  ChatHistory,
+  FaviconUpdater,
+  ChatWidgetProvider 
+} from 'chat-widget-sendbird';
 
 function App() {
   const config = {
     appId: "YOUR_SENDBIRD_APP_ID",
     userId: "unique-user-123",
+    nickname: "User Name",
+    profileUrl: "https://example.com/avatar.jpg",
+    withSound: true,
+    withNotification: true,
+    logger: (message, type) => {
+      console.log(`[${type}] ${message}`);
+    },
   };
 
   return (
@@ -69,6 +88,15 @@ function App() {
           <ChatList />
         </div>
         <ChatWidget />
+        <ChatHistory
+          externalHistoryUrl="https://your-api.com/chat/history"
+          externalToken={() => "Bearer YOUR_TOKEN"}
+        />
+        <FaviconUpdater
+          faviconAppUrl="favicon.ico"
+          faviconUnreadAppUrl="favicon-alert.ico"
+          faviconId="favicon"
+        />
       </div>
     </ChatWidgetProvider>
   );
@@ -80,7 +108,7 @@ function App() {
 ### Main Components
 
 #### `ChatWidget`
-The main chat widget component that renders multiple chat windows.
+The main chat widget component that renders multiple chat windows with drag and resize functionality.
 
 ```tsx
 import { ChatWidget } from 'chat-widget-sendbird';
@@ -98,6 +126,31 @@ import { ChatList } from 'chat-widget-sendbird';
   onChannelSelect={(channel) => console.log('Selected:', channel)}
   onClose={() => console.log('List closed')}
   className="custom-class"
+/>
+```
+
+#### `ChatHistory`
+A component for displaying chat history from external APIs.
+
+```tsx
+import { ChatHistory } from 'chat-widget-sendbird';
+
+<ChatHistory
+  externalHistoryUrl="https://your-api.com/chat/history"
+  externalToken={() => "Bearer YOUR_TOKEN"}
+/>
+```
+
+#### `FaviconUpdater`
+Automatically updates the favicon based on unread message count.
+
+```tsx
+import { FaviconUpdater } from 'chat-widget-sendbird';
+
+<FaviconUpdater
+  faviconAppUrl="favicon.ico"
+  faviconUnreadAppUrl="favicon-alert.ico"
+  faviconId="favicon"
 />
 ```
 
@@ -128,13 +181,25 @@ function MyComponent() {
     handleSelection,
     handleCloseChat,
     handleMinimizeChat,
-    handleCloseAllChats
+    handleCloseAllChats,
+    handleOpenChat,
+    handleJoinChannel,
+    handleFreezeChannel,
+    handleUnfreezeChannel,
+    handleToggleSound,
+    handleToggleNotification,
+    state,
+    handleDisconnect,
+    handleConnect,
+    logger
   } = useChatWidget();
 
   return (
     <div>
       <p>Open channels: {maximizedChannels.length}</p>
+      <p>Sound enabled: {state.withSound ? 'Yes' : 'No'}</p>
       <button onClick={handleCloseAllChats}>Close All</button>
+      <button onClick={handleToggleSound}>Toggle Sound</button>
     </div>
   );
 }
@@ -147,10 +212,7 @@ Hook to track unread message count.
 import { useUnreadMessages } from 'chat-widget-sendbird';
 
 function UnreadBadge() {
-  const unreadCount = useUnreadMessages({
-    appId: "YOUR_APP_ID",
-    userId: "user-123"
-  });
+  const unreadCount = useUnreadMessages();
 
   return unreadCount > 0 ? <span>{unreadCount}</span> : null;
 }
@@ -159,7 +221,7 @@ function UnreadBadge() {
 ## ⚙️ Configuration
 
 ### SendBirdConfig
-Basic configuration for SendBird connection.
+Base configuration for SendBird connection.
 
 ```tsx
 interface SendBirdConfig {
@@ -169,14 +231,15 @@ interface SendBirdConfig {
 ```
 
 ### ChatWidgetConfig
-Extended configuration with event handlers.
+Extended configuration with all available options.
 
 ```tsx
 interface ChatWidgetConfig extends SendBirdConfig {
-  onChannelChanged?: (channel: ChannelType) => void;
-  onMessageReceived?: (message: unknown) => void;
-  onUserConnected?: (user: unknown) => void;
-  onUserDisconnected?: (user: unknown) => void;
+  nickname?: string;    // Optional: User display name
+  profileUrl?: string;  // Optional: User profile image URL
+  withSound?: boolean;  // Optional: Enable sound notifications (default: true)
+  withNotification?: boolean; // Optional: Enable browser notifications (default: true)
+  logger?: (message: string, type: "error" | "warn" | "info" | "debug") => void; // Optional: Custom logger
 }
 ```
 
@@ -186,17 +249,13 @@ interface ChatWidgetConfig extends SendBirdConfig {
 const config = {
   appId: "YOUR_SENDBIRD_APP_ID",
   userId: "unique-user-123",
-  onChannelChanged: (channel) => {
-    console.log('Channel changed:', channel);
-  },
-  onMessageReceived: (message) => {
-    console.log('Message received:', message);
-  },
-  onUserConnected: (user) => {
-    console.log('User connected:', user);
-  },
-  onUserDisconnected: (user) => {
-    console.log('User disconnected:', user);
+  nickname: "John Doe",
+  profileUrl: "https://example.com/avatar.jpg",
+  withSound: true,
+  withNotification: true,
+  logger: (message, type) => {
+    // Custom logging implementation
+    console.log(`[${type.toUpperCase()}] ${message}`);
   }
 };
 ```
@@ -209,16 +268,23 @@ The package exports comprehensive TypeScript types:
 import type {
   SendBirdConfig,
   ChatWidgetConfig,
+  ChatWidgetProviderProps,
   ChatIconProps,
   ChatListProps,
   ChannelListProps,
   ChatWindowProps,
   ChatWidgetProps,
-  ChatWidgetProviderProps,
   ChannelType,
   ChannelEntry,
   ChatSize,
-  ChannelStatus
+  ChannelStatus,
+  ProfileImageProps,
+  FaviconUpdaterProps,
+  ChatHistoryProps,
+  ChatHistoryParams,
+  ChatHistoryHandle,
+  ChatHistoryMessage,
+  ChannelData
 } from 'chat-widget-sendbird';
 ```
 
@@ -226,8 +292,10 @@ import type {
 
 - `ChannelType`: Represents a SendBird group channel
 - `ChannelEntry`: Internal channel state with URL, key, and minimized status
-- `ChatSize`: Dimensions for chat windows
+- `ChatSize`: Dimensions for chat windows with default values
 - `ChannelStatus`: Channel status constants (COMPLETED, PENDING, ACTIVE)
+- `ChatHistoryMessage`: Structure for chat history messages
+- `ChannelData`: Additional channel metadata (wo, vin, ro, creatorId)
 
 ## 🎨 Styling
 
@@ -236,6 +304,7 @@ import type {
 The package includes custom Tailwind classes:
 
 - `chw-primary`: Primary color variable
+- `chw-secondary`: Secondary color variable
 - `chw-overlay`: Overlay color
 - `shadow-chw`: Custom shadow for chat components
 
@@ -268,6 +337,10 @@ chat-widget-sendbird/
 │   └── style1.css        # Compiled styles
 ├── src/
 │   ├── components/       # React components
+│   │   ├── chat/        # Chat-related components
+│   │   ├── history/     # Chat history components
+│   │   ├── list/        # Channel list components
+│   │   └── ui/          # UI utility components
 │   ├── hooks/           # Custom hooks
 │   ├── providers/       # Context providers
 │   ├── types/           # TypeScript types
@@ -295,13 +368,22 @@ The `dev/` folder contains a complete example:
 
 ```tsx
 // dev/App.tsx
-import { ChatList, ChatWidget, ChatWidgetProvider } from "../src/index";
+import { 
+  ChatList, 
+  ChatWidget, 
+  ChatHistory,
+  FaviconUpdater,
+  ChatWidgetProvider 
+} from "@/index";
 
 function App() {
   const config = {
-    appId: "3CCEC8CF-D8FD-447B-88E2-91294429F5D2",
-    userId: "oleyva930424@gmail.com",
-    isOpen: true,
+    appId: "YOUR_SENDBIRD_APP_ID",
+    userId: "user@example.com",
+    nickname: "User Name",
+    profileUrl: "https://example.com/avatar.jpg",
+    withSound: true,
+    withNotification: true,
   };
 
   return (
@@ -312,6 +394,15 @@ function App() {
             <ChatList />
           </div>
           <ChatWidget />
+          <ChatHistory
+            externalHistoryUrl="https://your-api.com/chat/history"
+            externalToken={() => "Bearer YOUR_TOKEN"}
+          />
+          <FaviconUpdater
+            faviconAppUrl="favicon.ico"
+            faviconUnreadAppUrl="favicon-alert.ico"
+            faviconId="favicon"
+          />
         </div>
       </ChatWidgetProvider>
     </div>
@@ -326,21 +417,51 @@ import React, { useState } from 'react';
 import { 
   ChatWidget, 
   ChatList, 
+  ChatHistory,
+  FaviconUpdater,
   ChatWidgetProvider,
   useChatWidget 
 } from 'chat-widget-sendbird';
 
 function ChatControls() {
-  const { handleCloseAllChats, maximizedChannels } = useChatWidget();
+  const { 
+    handleCloseAllChats, 
+    maximizedChannels, 
+    handleToggleSound,
+    handleToggleNotification,
+    state,
+    handleDisconnect,
+    handleConnect
+  } = useChatWidget();
   
   return (
-    <div className="p-4">
-      <button 
-        onClick={handleCloseAllChats}
-        className="px-4 py-2 bg-red-500 text-white rounded"
-      >
-        Close All Chats ({maximizedChannels.length})
-      </button>
+    <div className="p-4 bg-white border rounded-lg">
+      <div className="flex flex-col gap-2">
+        <p>Open channels: {maximizedChannels.length}</p>
+        <p>Sound: {state.withSound ? 'ON' : 'OFF'}</p>
+        <p>Notifications: {state.withNotification ? 'ON' : 'OFF'}</p>
+        
+        <div className="flex gap-2">
+          <button 
+            onClick={handleCloseAllChats}
+            className="px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Close All Chats
+          </button>
+          <button 
+            onClick={handleToggleSound}
+            className="px-4 py-2 bg-blue-500 text-white rounded"
+          >
+            Toggle Sound
+          </button>
+          <button 
+            onClick={handleToggleNotification}
+            className="px-4 py-2 bg-green-500 text-white rounded"
+          >
+            Toggle Notifications
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -351,11 +472,12 @@ function App() {
   const config = {
     appId: "YOUR_SENDBIRD_APP_ID",
     userId: "user-" + Date.now(),
-    onChannelChanged: (channel) => {
-      console.log('Channel changed:', channel);
-    },
-    onMessageReceived: (message) => {
-      console.log('Message received:', message);
+    nickname: "Demo User",
+    profileUrl: "https://example.com/avatar.jpg",
+    withSound: true,
+    withNotification: true,
+    logger: (message, type) => {
+      console.log(`[${type.toUpperCase()}] ${message}`);
     }
   };
 
@@ -386,6 +508,15 @@ function App() {
         </div>
         
         <ChatWidget />
+        <ChatHistory
+          externalHistoryUrl="https://your-api.com/chat/history"
+          externalToken={() => "Bearer YOUR_TOKEN"}
+        />
+        <FaviconUpdater
+          faviconAppUrl="favicon.ico"
+          faviconUnreadAppUrl="favicon-alert.ico"
+          faviconId="favicon"
+        />
       </ChatWidgetProvider>
     </div>
   );
@@ -414,6 +545,11 @@ export default App;
 4. **Chat windows not appearing**
    - Ensure `ChatWidgetProvider` wraps your components
    - Check that channels are being selected via `ChatList`
+
+5. **Chat history not loading**
+   - Verify your `externalHistoryUrl` is accessible
+   - Check that `externalToken` returns a valid token
+   - Ensure CORS is properly configured on your API
 
 ## 📋 Requirements
 
